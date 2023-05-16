@@ -34,7 +34,7 @@ export default function Sidebar({ open, closeSide, auth }) {
                                 <SidebarAdmin closeSide={closeSide} />
                             } */}
 
-                            {auth.roles.includes('Bendahara') &&
+                            {/* {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />
                             }
 
@@ -48,7 +48,7 @@ export default function Sidebar({ open, closeSide, auth }) {
 
                             {auth.roles.includes('Konseling') &&
                                 <SidebarKonseling closeSide={closeSide} />
-                            }
+                            } */}
 
                             {/* {auth.roles.includes('Karyawan') &&
                                 <SidebarKaryawan closeSide={closeSide} />
@@ -74,7 +74,7 @@ export default function Sidebar({ open, closeSide, auth }) {
                                 <SidebarTataUsaha closeSide={closeSide} />
                             } */}
 
-                            <SidebarLink closeSide={closeSide} href={route('slip-gaji')} active={route().current('slip-gaji')} label='slip gaji' />
+                            {/* <SidebarLink closeSide={closeSide} href={route('slip-gaji')} active={route().current('slip-gaji')} label='slip gaji' /> */}
                         </>
 
                         :

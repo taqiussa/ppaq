@@ -6,7 +6,7 @@ const Dashboard = () => {
     return (
         <>
             <Head title='Dashboard' />
-            <div className='pl-10 pt-10 text-slate-600 text-lg'>Selamat Datang di Sistem Akademik PP Al Qur'aaniyyah Pegandon</div>
+            <div className='pl-10 pt-10 text-slate-600 text-lg'>Selamat Datang di Sistem Informasi PP Al Qur'aaniyyah Pegandon</div>
             <div className='pl-10 text-slate-600 text-lg'>Untuk Menggunakan sistem silahkan klik Menu di atas bagi yang menggunakan HP. Bagi yang menggunakan laptop atau komputer, menu berada di samping kiri</div>
         </>
     )

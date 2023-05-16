@@ -7,8 +7,8 @@ export default function Guest({ children }) {
             <div>
                 <Link href="/" className='flex flex-col justify-center items-center space-y-7'>
                     <img src={logo} className='w-28' alt='logo'/>
-                    <div className="text-emerald-500 text-2xl lg:text-4xl font-bold lg:tracking-widest text-center">
-                        PP AL QUR'AANNIYAH
+                    <div className="text-emerald-500 text-xl lg:text-2xl font-bold lg:tracking-widest text-center">
+                        AL QUR'AANNIYAH PEGANDON
                     </div>
                 </Link>
             </div>
