@@ -25,7 +25,7 @@ export default function Sidebar({ open, closeSide, auth }) {
                         }
                         <h1 className="block py-3 text-lg font-bold text-emerald-700">{auth.user.name}</h1>
                     </div>
-                    {!auth.roles.includes('Siswa') ?
+                    {!auth.roles.includes('Santri') ?
                         <>
 
                             {/* <SidebarLink closeSide={closeSide} href={route('profile-pengguna')} active={route().current('profile-pengguna')} label='profile pengguna' /> */}

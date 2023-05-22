@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('nis');
+            $table->string('nisn', 40)->nullable();
+            $table->string('nik', 40)->nullable();
+            $table->string('tempat_lahir', 100);
+            $table->date('tanggal_lahir');
+            $table->string('no_kk', 40)->nullable();
+            $table->string('nama_ayah')->nullable();
+            $table->string('nik_ayah', 40)->nullable();
+            $table->string('nama_ibu')->nullable();
+            $table->string('nik_ibu', 40)->nullable();
+            $table->string('nama_wali')->nullable();
+            $table->string('nik_wali', 40)->nullable();
             $table->timestamps();
         });
     }
