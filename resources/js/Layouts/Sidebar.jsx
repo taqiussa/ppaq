@@ -6,6 +6,7 @@ import SidebarBendahara from './Partials/SidebarBendahara';
 import SidebarGuru from './Partials/SidebarGuru';
 import SidebarKetenagaan from './Partials/SidebarKetenagaan';
 import SidebarKonseling from './Partials/SidebarKonseling';
+import SidebarAdmin from './Partials/SidebarAdmin';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -30,9 +31,9 @@ export default function Sidebar({ open, closeSide, auth }) {
 
                             {/* <SidebarLink closeSide={closeSide} href={route('profile-pengguna')} active={route().current('profile-pengguna')} label='profile pengguna' /> */}
 
-                            {/* {auth.roles.includes('Admin') &&
+                            {auth.roles.includes('Admin') &&
                                 <SidebarAdmin closeSide={closeSide} />
-                            } */}
+                            }
 
                             {/* {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />
