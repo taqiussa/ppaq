@@ -1,6 +1,7 @@
 import InputText from '@/Components/Sia/InputText'
 import Tahun from '@/Components/Sia/Tahun'
 import getAllSiswaWithBiodata from '@/Functions/getAllSiswaWithBiodata'
+import getDataIndukSantri from '@/Functions/getDataIndukSantri'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import React, { useEffect, useState } from 'react'
@@ -32,7 +33,7 @@ const DataIndukSantri = ({ initTahun }) => {
     });
 
     async function getData() {
-        const response = await getAllSiswaWithBiodata(data.tahun)
+        const response = await getDataIndukSantri(data.tahun)
         setData({ ...data, listSiswa: response.listSiswa })
     }
 
