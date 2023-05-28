@@ -1,63 +1,43 @@
 import InputText from '@/Components/Sia/InputText'
-import Tahun from '@/Components/Sia/Tahun'
-import getAllSiswaWithBiodata from '@/Functions/getAllSiswaWithBiodata'
-import getDataIndukSantri from '@/Functions/getDataIndukSantri'
+import { tanggal } from '@/Functions/functions'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import { trackPromise } from 'react-promise-tracker'
 
-const DataIndukSantri = ({ initTahun }) => {
+const DataIndukSantri = ({ listSantri }) => {
 
     const { data, setData } = useForm({
-        tahun: initTahun,
         search: '',
-        listSiswa: []
     })
 
     const [page, setPage] = useState(0);
     const postsPerPage = 10;
     const numberOfPostsVisited = page * postsPerPage;
-    const totalPages = Math.ceil(data.listSiswa?.length / postsPerPage);
+    const totalPages = Math.ceil(listSantri?.length / postsPerPage);
     const changePage = ({ selected }) => {
         setPage(selected);
     };
 
-    const filteredData = data.listSiswa?.filter((list) => {
+    const filteredData = listSantri?.filter((list) => {
         const searchTerm = data.search.toLowerCase();
-        const siswa = list.user?.name.toLowerCase();
+        const santri = list?.name.toLowerCase();
         return (
-            siswa.includes(searchTerm)
+            santri.includes(searchTerm)
         );
     });
-
-    async function getData() {
-        const response = await getDataIndukSantri(data.tahun)
-        setData({ ...data, listSiswa: response.listSiswa })
-    }
 
     const onHandleChange = (e) => {
         setData(e.target.name, e.target.value)
     }
 
-    useEffect(() => {
-        if (data.tahun)
-            trackPromise(getData())
-    }, [data.tahun])
-
     return (
         <>
-            <Head title='Cari Data Siswa' />
-            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">cari data siswa</div>
+            <Head title='Data Induk Santri' />
+            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">
+                data induk santri
+            </div>
             <div className='lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
-                <Tahun
-                    id='tahun'
-                    name='tahun'
-                    value={data.tahun}
-                    handleChange={onHandleChange}
-                />
-
                 <InputText
                     id='search'
                     name='search'
@@ -81,10 +61,10 @@ const DataIndukSantri = ({ initTahun }) => {
                                 Nama
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                NISN
+                                Tempat, Tanggal Lahir
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Kelas
+                                NIK
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
                                 Orang Tua
@@ -95,31 +75,31 @@ const DataIndukSantri = ({ initTahun }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.listSiswa &&
+                        {listSantri &&
                             filteredData
                                 .slice(numberOfPostsVisited, numberOfPostsVisited + postsPerPage)
-                                .map((siswa, index) => (
+                                .map((santri, index) => (
                                     <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
                                         <td className="py-2 px-2 font-medium text-slate-600 text-center">
                                             {index + 1 + (page * 10)}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {siswa.nis}
+                                            {santri.nis}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {siswa.user?.name}
+                                            {santri.name}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {siswa.biodata?.nisn}
+                                            {santri.biodata?.tempat_lahir}, {santri.biodata?.tanggal_lahir ? tanggal(santri.biodata?.tanggal_lahir) : null}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {siswa.kelas?.nama}
+                                            {santri.biodata?.nik}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {siswa.orang_tua?.nama_ayah}
+                                            {santri.biodata?.nama_ayah} - {santri.biodata?.nama_ibu}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            RT {siswa.alamat?.rt} RW {siswa.alamat?.rw}, Desa {siswa.alamat?.desa} - Kec. {siswa.alamat?.kecamatan}
+                                            {santri.alamat?.alamat ?? '-'}, RT {santri.alamat?.rt ?? '-'} RW {santri.alamat?.rw ?? '-'} Desa {santri.alamat?.desa} - Kec. {santri.alamat?.kecamatan} - Kab. {santri.alamat?.kabupaten} - Prov. {santri.alamat?.provinsi}
                                         </td>
                                     </tr>
                                 ))}
