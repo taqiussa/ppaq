@@ -37,18 +37,18 @@ export default forwardRef(function Bulan(
                 >
 
                     <option value="">Pilih Bulan</option>
-                    <option value="01">Januari</option>
-                    <option value="02">Februari</option>
-                    <option value="03">Maret</option>
-                    <option value="04">April</option>
-                    <option value="05">Mei</option>
-                    <option value="06">Juni</option>
-                    <option value="07">Juli</option>
-                    <option value="08">Agustus</option>
-                    <option value="09">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
+                    <option value="01">Muharram</option>
+                    <option value="02">Shafar</option>
+                    <option value="03">Rabiul Awwal</option>
+                    <option value="04">Rabiul Akhir</option>
+                    <option value="05">Jumadil Awwal</option>
+                    <option value="06">Jumadil Akhir</option>
+                    <option value="07">Rajab</option>
+                    <option value="08">Sya'ban</option>
+                    <option value="09">Ramadhan</option>
+                    <option value="10">Syawwal</option>
+                    <option value="11">Dzulqo'dah</option>
+                    <option value="12">Dzulhijjah</option>
 
 
                 </select>

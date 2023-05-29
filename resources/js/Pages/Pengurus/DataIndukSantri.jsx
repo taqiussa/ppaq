@@ -37,12 +37,12 @@ const DataIndukSantri = ({ listSantri }) => {
             <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">
                 data induk santri
             </div>
-            <div className='lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
+            <div className='lg:grid lg:grid-cols-3 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
                 <InputText
                     id='search'
                     name='search'
                     value={data.search}
-                    label='search'
+                    label='Cari'
                     handleChange={onHandleChange}
                 />
 

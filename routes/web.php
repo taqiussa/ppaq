@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AturKategoriPembayaranController;
 use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\LandingController;
@@ -42,6 +43,17 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
     Route::controller(UploadSantriController::class)->group(function(){
         Route::get('upload-santri', 'index')->name('upload-santri');
         Route::post('upload-santri', 'upload')->name('upload-santri.upload');
+    });
+
+});
+
+// Role Bendahara
+Route::middleware(['auth', 'role:Bendahara'])->group(function (){
+
+    Route::controller(AturKategoriPembayaranController::class)->group(function(){
+        Route::get('atur-kategori-pembayaran', 'index')->name('atur-kategori-pembayaran');
+        Route::post('atur-kategori-pembayaran', 'simpan')->name('atur-kategori-pembayaran.simpan');
+        Route::delete('atur-kategori-pembayaran', 'hapus')->name('atur-kategori-pembayaran.hapus');
     });
 
 });

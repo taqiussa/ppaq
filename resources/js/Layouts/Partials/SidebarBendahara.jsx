@@ -8,7 +8,7 @@ const SidebarBendahara = ({ closeSide }) => {
                 Bendahara
             </div>
             <div>
-                <SidebarLink closeSide={closeSide} href={route('atur-kategori-pemasukan')} active={route().current('atur-kategori-pemasukan')} label='atur kategori pemasukan' />
+                <SidebarLink closeSide={closeSide} href={route('atur-kategori-pembayaran')} active={route().current('atur-kategori-pembayaran')} label='atur kategori pembayaran' />
             </div>
         </div>
     )

@@ -37,11 +37,11 @@ export default function Sidebar({ open, closeSide, auth }) {
                                 <SidebarKetua closeSide={closeSide} />
                             }
 
-                            {/* {auth.roles.includes('Bendahara') &&
+                            {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />
                             }
 
-                            {auth.roles.includes('Guru') &&
+                            {/* {auth.roles.includes('Guru') &&
                                 <SidebarGuru closeSide={closeSide} />
                             }
 
