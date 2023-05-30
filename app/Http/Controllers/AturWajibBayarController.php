@@ -23,13 +23,11 @@ class AturWajibBayarController extends Controller
         request()->validate([
             'kategoriPembayaranId' => 'required',
             'tahun' => 'required',
-            'keterangan' => 'required',
             'jumlah' => 'required'
         ]);
 
         WajibBayar::create([
             'tahun' => request('tahun'),
-            'keterangan' => request('keterangan'),
             'jumlah' => ambilAngka(request('jumlah')),
             'kategori_pembayaran_id' => request('kategoriPembayaranId'),
         ]);

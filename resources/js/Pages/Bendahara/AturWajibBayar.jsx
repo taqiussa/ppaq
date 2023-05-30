@@ -18,7 +18,6 @@ const AturWajibBayar = ({ initTahun, listKategori }) => {
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
         kategoriPembayaranId: '',
-        keterangan: '',
         jumlah: 0,
         listWajibBayar: []
     })
@@ -102,14 +101,6 @@ const AturWajibBayar = ({ initTahun, listKategori }) => {
                     />
 
                     <InputText
-                        id='keterangan'
-                        name='keterangan'
-                        value={data.keterangan}
-                        label='Keterangan'
-                        handleChange={onHandleChange}
-                    />
-
-                    <InputText
                         id='jumlah'
                         name='jumlah'
                         value={data.jumlah}
@@ -129,9 +120,6 @@ const AturWajibBayar = ({ initTahun, listKategori }) => {
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
                                 Kategori Pembayaran
-                            </th>
-                            <th scope='col' className="py-3 px-2 text-left">
-                                Keterangan
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
                                 Jumlah
