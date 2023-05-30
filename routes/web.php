@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AturKategoriPembayaranController;
+use App\Http\Controllers\AturWajibBayarController;
 use App\Http\Controllers\DataIndukSantriController;
+use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
@@ -31,8 +33,14 @@ Route::get('/dashboard', function () {
 // Get Data
 Route::middleware(['auth'])->group(function (){
 
+    // Route Get Data
     Route::controller(GetDataController::class)->group(function(){
         Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
+    });
+    
+    // Route Get Data Bendahara
+    Route::controller(GetDataBendaharaController::class)->group(function(){
+        Route::post('get-wajib-bayar', 'get_wajib_bayar')->name('get-wajib-bayar');
     });
 
 });
@@ -50,10 +58,18 @@ Route::middleware(['auth', 'role:Admin'])->group(function (){
 // Role Bendahara
 Route::middleware(['auth', 'role:Bendahara'])->group(function (){
 
+    // Route Atur Kategori Pembayaran
     Route::controller(AturKategoriPembayaranController::class)->group(function(){
         Route::get('atur-kategori-pembayaran', 'index')->name('atur-kategori-pembayaran');
         Route::post('atur-kategori-pembayaran', 'simpan')->name('atur-kategori-pembayaran.simpan');
         Route::delete('atur-kategori-pembayaran', 'hapus')->name('atur-kategori-pembayaran.hapus');
+    });
+
+    // Route Atur Wajib Bayar
+    Route::controller(AturWajibBayarController::class)->group(function(){
+        Route::get('atur-wajib-bayar', 'index')->name('atur-wajib-bayar');
+        Route::post('atur-wajib-bayar', 'simpan')->name('atur-wajib-bayar.simpan');
+        Route::delete('atur-wajib-bayar', 'hapus')->name('atur-wajib-bayar.hapus');
     });
 
 });

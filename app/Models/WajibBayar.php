@@ -18,6 +18,6 @@ class WajibBayar extends Model
      */
     public function kategoriPembayaran(): BelongsTo
     {
-        return $this->belongsTo(KategoPembayaran::class)->withDefault();
+        return $this->belongsTo(KategoriPembayaran::class)->withDefault();
     }
 }
