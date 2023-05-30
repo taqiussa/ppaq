@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('nis');
-            $table->foreignId('wajib_bayar_id');
+            $table->foreignId('kategori_pembayaran_id');
             $table->string('tahun', 30);
             $table->integer('jumlah');
             $table->timestamps();
