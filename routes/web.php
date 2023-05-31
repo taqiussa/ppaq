@@ -5,10 +5,9 @@ use App\Http\Controllers\AturWajibBayarController;
 use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
-use App\Http\Controllers\LandingController;
+use App\Http\Controllers\InputPembayaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadSantriController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +39,7 @@ Route::middleware(['auth'])->group(function (){
     
     // Route Get Data Bendahara
     Route::controller(GetDataBendaharaController::class)->group(function(){
+        Route::post('get-pembayaran', 'get_pembayaran')->name('get-pembayaran');
         Route::post('get-wajib-bayar', 'get_wajib_bayar')->name('get-wajib-bayar');
     });
 
@@ -70,6 +70,13 @@ Route::middleware(['auth', 'role:Bendahara'])->group(function (){
         Route::get('atur-wajib-bayar', 'index')->name('atur-wajib-bayar');
         Route::post('atur-wajib-bayar', 'simpan')->name('atur-wajib-bayar.simpan');
         Route::delete('atur-wajib-bayar', 'hapus')->name('atur-wajib-bayar.hapus');
+    });
+
+    // Route Atur Wajib Bayar
+    Route::controller(InputPembayaranController::class)->group(function(){
+        Route::get('input-pembayaran', 'index')->name('input-pembayaran');
+        Route::post('input-pembayaran', 'simpan')->name('input-pembayaran.simpan');
+        Route::delete('input-pembayaran', 'hapus')->name('input-pembayaran.hapus');
     });
 
 });

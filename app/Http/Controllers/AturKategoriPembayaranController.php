@@ -11,7 +11,7 @@ class AturKategoriPembayaranController extends Controller
 
     public function index()
     {
-        return inertia('Bendahara/AturKategoriPembayaran', ['listKategori' => KategoriPembayaran::orderBy('nama')->get()]);
+        return inertia('Bendahara/AturKategoriPembayaran', ['listKategori' => KategoriPembayaran::get()]);
     }
 
     public function simpan()
