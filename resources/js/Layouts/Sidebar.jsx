@@ -6,6 +6,7 @@ import SidebarBendahara from './Partials/SidebarBendahara';
 import SidebarAdmin from './Partials/SidebarAdmin';
 import SidebarKetua from './Partials/SidebarKetua';
 import SidebarSantri from './Partials/SidebarSantri';
+import SidebarPendidikan from './Partials/SidebarPendidikan';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -34,51 +35,18 @@ export default function Sidebar({ open, closeSide, auth }) {
                                 <SidebarAdmin closeSide={closeSide} />
                             }
 
-                            {auth.roles.includes('Ketua') &&
-                                <SidebarKetua closeSide={closeSide} />
-                            }
-
                             {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />
                             }
 
-                            {/* {auth.roles.includes('Guru') &&
-                                <SidebarGuru closeSide={closeSide} />
+                            {auth.roles.includes('Pendidikan') &&
+                                <SidebarPendidikan closeSide={closeSide} />
                             }
 
-                            {auth.roles.includes('Ketenagaan') &&
-                                <SidebarKetenagaan closeSide={closeSide} />
+                            {auth.roles.includes('Ketua') &&
+                                <SidebarKetua closeSide={closeSide} />
                             }
 
-                            {auth.roles.includes('Konseling') &&
-                                <SidebarKonseling closeSide={closeSide} />
-                            } */}
-
-                            {/* {auth.roles.includes('Karyawan') &&
-                                <SidebarKaryawan closeSide={closeSide} />
-                            }
-
-                            {auth.roles.includes('Kepala Sekolah') &&
-                                <SidebarKepalaSekolah closeSide={closeSide} />
-                            }
-
-                            {auth.roles.includes('Kesiswaan') &&
-                                <SidebarKesiswaan closeSide={closeSide} />
-                            }
-                            
-                            {auth.roles.includes('Konseling') &&
-                                <SidebarKonseling closeSide={closeSide} />
-                            }
-
-                            {auth.roles.includes('Kurikulum') &&
-                                <SidebarKurikulum closeSide={closeSide} />
-                            }
-
-                            {auth.roles.includes('Tata Usaha') &&
-                                <SidebarTataUsaha closeSide={closeSide} />
-                            } */}
-
-                            {/* <SidebarLink closeSide={closeSide} href={route('slip-gaji')} active={route().current('slip-gaji')} label='slip gaji' /> */}
                         </>
 
                         :

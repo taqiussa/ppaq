@@ -7,6 +7,7 @@ use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\GetDataSantriController;
+use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputPembayaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RekapPembayaranController;
@@ -49,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Get Data
     Route::controller(GetDataController::class)->group(function () {
+        Route::post('get-absensi', 'get_absensi')->name('get-absensi');
         Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
     });
 
@@ -108,11 +110,19 @@ Route::middleware(['auth', 'role:Bendahara'])->group(function () {
 // Role Semua
 Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan|Santri'])->group(function () {
 
+    // Route Data Induk Santri
     Route::controller(DataIndukSantriController::class)->group(function () {
         Route::get('data-induk-santri', 'index')->name('data-induk-santri');
         Route::get('data-induk-santri/edit', 'edit')->name('data-induk-santri.edit');
         Route::put('data-induk-santri', 'update')->name('data-induk-santri.update');
         Route::post('data-induk-santri', 'simpan')->name('data-induk-santri.simpan');
+    });
+
+    // Route Input Absensi
+    Route::controller(InputAbsensiController::class)->group(function () {
+        Route::get('input-absensi', 'index')->name('input-absensi');
+        Route::post('input-absensi', 'simpan')->name('input-absensi.simpan');
+        Route::delete('input-absensi', 'hapus')->name('input-absensi.hapus');
     });
 
     // Menu Santri
