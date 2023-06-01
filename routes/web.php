@@ -27,16 +27,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/set', function () {
+Route::get('/set', function () {
 
-//     $user = User::where('nis','!=', null)->get();
+    $user = User::where('nis','!=', null)->get();
 
-//     foreach ($user as $data)
-//     {
-//         $data->assignRole('Santri');
-//     }
+    foreach ($user as $data)
+    {
+        $data->assignRole('Santri');
+    }
 
-// });
+});
 
 Route::get('/', function () {
     return inertia('Auth/Login');
