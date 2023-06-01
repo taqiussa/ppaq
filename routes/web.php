@@ -9,6 +9,7 @@ use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\GetDataSantriController;
 use App\Http\Controllers\InputPembayaranController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RekapPembayaranController;
 use App\Http\Controllers\UploadSantriController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/set', function () {
-    
+
 //     $user = User::where('nis','!=', null)->get();
 
 //     foreach ($user as $data)
@@ -44,15 +45,16 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Get Data
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth'])->group(function () {
 
     // Route Get Data
-    Route::controller(GetDataController::class)->group(function(){
+    Route::controller(GetDataController::class)->group(function () {
         Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
     });
-    
+
     // Route Get Data Bendahara
-    Route::controller(GetDataBendaharaController::class)->group(function(){
+    Route::controller(GetDataBendaharaController::class)->group(function () {
+        Route::post('get-all-pembayaran', 'get_all_pembayaran')->name('get-all-pembayaran');
         Route::post('get-pembayaran', 'get_pembayaran')->name('get-pembayaran');
         Route::post('get-wajib-bayar', 'get_wajib_bayar')->name('get-wajib-bayar');
     });
@@ -61,49 +63,52 @@ Route::middleware(['auth'])->group(function (){
     Route::controller(GetDataSantriController::class)->group(function () {
         Route::post('get-administrasi', 'get_administrasi')->name('get-administrasi');
     });
-
 });
 
 // Role Admin
-Route::middleware(['auth', 'role:Admin'])->group(function (){
+Route::middleware(['auth', 'role:Admin'])->group(function () {
 
-    Route::controller(UploadSantriController::class)->group(function(){
+    Route::controller(UploadSantriController::class)->group(function () {
         Route::get('upload-santri', 'index')->name('upload-santri');
         Route::post('upload-santri', 'upload')->name('upload-santri.upload');
     });
-
 });
 
 // Role Bendahara
-Route::middleware(['auth', 'role:Bendahara'])->group(function (){
+Route::middleware(['auth', 'role:Bendahara'])->group(function () {
 
     // Route Atur Kategori Pembayaran
-    Route::controller(AturKategoriPembayaranController::class)->group(function(){
+    Route::controller(AturKategoriPembayaranController::class)->group(function () {
         Route::get('atur-kategori-pembayaran', 'index')->name('atur-kategori-pembayaran');
         Route::post('atur-kategori-pembayaran', 'simpan')->name('atur-kategori-pembayaran.simpan');
         Route::delete('atur-kategori-pembayaran', 'hapus')->name('atur-kategori-pembayaran.hapus');
     });
 
     // Route Atur Wajib Bayar
-    Route::controller(AturWajibBayarController::class)->group(function(){
+    Route::controller(AturWajibBayarController::class)->group(function () {
         Route::get('atur-wajib-bayar', 'index')->name('atur-wajib-bayar');
         Route::post('atur-wajib-bayar', 'simpan')->name('atur-wajib-bayar.simpan');
         Route::delete('atur-wajib-bayar', 'hapus')->name('atur-wajib-bayar.hapus');
     });
 
     // Route Atur Wajib Bayar
-    Route::controller(InputPembayaranController::class)->group(function(){
+    Route::controller(InputPembayaranController::class)->group(function () {
         Route::get('input-pembayaran', 'index')->name('input-pembayaran');
         Route::post('input-pembayaran', 'simpan')->name('input-pembayaran.simpan');
         Route::delete('input-pembayaran', 'hapus')->name('input-pembayaran.hapus');
     });
 
+    // Route Rekap Pembayaran
+    Route::controller(RekapPembayaranController::class)->group(function () {
+        Route::get('rekap-pembayaran', 'index')->name('rekap-pembayaran');
+        Route::delete('rekap-pembayaran', 'hapus')->name('rekap-pembayaran.hapus');
+    });
 });
 
 // Role Semua
-Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan|Santri'])->group(function (){
+Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan|Santri'])->group(function () {
 
-    Route::controller(DataIndukSantriController::class)->group(function(){
+    Route::controller(DataIndukSantriController::class)->group(function () {
         Route::get('data-induk-santri', 'index')->name('data-induk-santri');
         Route::get('data-induk-santri/edit', 'edit')->name('data-induk-santri.edit');
         Route::put('data-induk-santri', 'update')->name('data-induk-santri.update');
