@@ -27,17 +27,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/set', function () {
-
-    $user = User::where('nis','!=', null)->get();
-
-    foreach ($user as $data)
-    {
-        $data->assignRole('Santri');
-    }
-
-});
-
 Route::get('/', function () {
     return inertia('Auth/Login');
 });
