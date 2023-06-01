@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\AturKategoriPembayaranController;
 use App\Http\Controllers\AturWajibBayarController;
 use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
+use App\Http\Controllers\GetDataSantriController;
 use App\Http\Controllers\InputPembayaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadSantriController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/set', function () {
+    
+//     $user = User::where('nis','!=', null)->get();
+
+//     foreach ($user as $data)
+//     {
+//         $data->assignRole('Santri');
+//     }
+
+// });
 
 Route::get('/', function () {
     return inertia('Auth/Login');
@@ -41,6 +55,11 @@ Route::middleware(['auth'])->group(function (){
     Route::controller(GetDataBendaharaController::class)->group(function(){
         Route::post('get-pembayaran', 'get_pembayaran')->name('get-pembayaran');
         Route::post('get-wajib-bayar', 'get_wajib_bayar')->name('get-wajib-bayar');
+    });
+
+    // Route Get Data Santri
+    Route::controller(GetDataSantriController::class)->group(function () {
+        Route::post('get-administrasi', 'get_administrasi')->name('get-administrasi');
     });
 
 });
@@ -91,6 +110,9 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::post('data-induk-santri', 'simpan')->name('data-induk-santri.simpan');
     });
 
+    // Menu Santri
+    // Route Administrasi
+    Route::get('administrasi', AdministrasiController::class)->name('administrasi');
 });
 
 Route::middleware('auth')->group(function () {

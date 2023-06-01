@@ -5,7 +5,7 @@ import Kategori from '@/Components/Sia/Kategori'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
-import { maskRupiah, rupiah } from '@/Functions/functions'
+import { hariTanggal, maskRupiah, rupiah } from '@/Functions/functions'
 import getPembayaran from '@/Functions/getPembayaran'
 import getWajibBayar from '@/Functions/getWajibBayar'
 import AppLayout from '@/Layouts/AppLayout'
@@ -154,6 +154,9 @@ const InputPembayaran = ({ initTahun, listSantri }) => {
                                 Kategori Pembayaran
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
+                                Tanggal Pembayaran
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-left">
                                 Jumlah
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
@@ -169,6 +172,9 @@ const InputPembayaran = ({ initTahun, listSantri }) => {
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
                                     {pembayaran.kategori_pembayaran?.nama}
+                                </td>
+                                <td className="py-2 px-2 font-medium text-slate-600">
+                                    {hariTanggal(pembayaran.created_at)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
                                     {rupiah(pembayaran.jumlah)}

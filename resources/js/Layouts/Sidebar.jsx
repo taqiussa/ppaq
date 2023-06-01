@@ -5,6 +5,7 @@ import { mdiAccountCircleOutline } from '@mdi/js';
 import SidebarBendahara from './Partials/SidebarBendahara';
 import SidebarAdmin from './Partials/SidebarAdmin';
 import SidebarKetua from './Partials/SidebarKetua';
+import SidebarSantri from './Partials/SidebarSantri';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -82,9 +83,9 @@ export default function Sidebar({ open, closeSide, auth }) {
 
                         :
                         <>
-                            {/* {auth.roles.includes('Siswa') &&
-                                <SidebarSiswa closeSide={closeSide} />
-                            } */}
+                            {auth.roles.includes('Santri') &&
+                                <SidebarSantri closeSide={closeSide} />
+                            }
                         </>
                     }
 
