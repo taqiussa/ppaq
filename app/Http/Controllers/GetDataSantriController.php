@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use App\Models\Pembayaran;
 use App\Models\WajibBayar;
 
@@ -17,6 +18,15 @@ class GetDataSantriController extends Controller
                 ->with([
                     'kategoriPembayaran' => fn ($q) => $q->select('id', 'nama'),
                 ])
+                ->get()
+        ]);
+    }
+
+    public function get_kehadiran()
+    {
+        return response()->json([
+            'listAbsensi' => Absensi::whereTahun(request('tahun'))
+                ->whereNis(auth()->user()->nis)
                 ->get()
         ]);
     }

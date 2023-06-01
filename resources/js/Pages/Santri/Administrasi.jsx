@@ -91,7 +91,7 @@ const Administrasi = ({ initTahun }) => {
                                 </tr>
                             ))}
                         <tr className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
-                            <td colspan={4} className="py-2 px-2 font-bold text-slate-600">
+                            <td colSpan={4} className="py-2 px-2 font-bold text-slate-600">
                                 Total Wajib Bayar
                             </td>
                             <td colSpan={1} className="py-2 px-2 font-bold text-slate-600">
@@ -99,7 +99,7 @@ const Administrasi = ({ initTahun }) => {
                             </td>
                         </tr>
                         <tr className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
-                            <td colspan={4} className="py-2 px-2 font-bold text-slate-600">
+                            <td colSpan={4} className="py-2 px-2 font-bold text-slate-600">
                                 Total Pembayaran
                             </td>
                             <td colSpan={1} className="py-2 px-2 font-bold text-slate-600">
@@ -107,7 +107,7 @@ const Administrasi = ({ initTahun }) => {
                             </td>
                         </tr>
                         <tr className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
-                            <td colspan={4} className="py-2 px-2 font-bold text-slate-600">
+                            <td colSpan={4} className="py-2 px-2 font-bold text-slate-600">
                                 Belum Dibayar
                             </td>
                             <td colSpan={1} className="py-2 px-2 font-bold text-slate-600">

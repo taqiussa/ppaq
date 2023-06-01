@@ -9,6 +9,7 @@ use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\GetDataSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputPembayaranController;
+use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RekapPembayaranController;
 use App\Http\Controllers\UploadSantriController;
@@ -64,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     // Route Get Data Santri
     Route::controller(GetDataSantriController::class)->group(function () {
         Route::post('get-administrasi', 'get_administrasi')->name('get-administrasi');
+        Route::post('get-kehadiran', 'get_kehadiran')->name('get-kehadiran');
     });
 });
 
@@ -128,6 +130,7 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
     // Menu Santri
     // Route Administrasi
     Route::get('administrasi', AdministrasiController::class)->name('administrasi');
+    Route::get('kehadiran', KehadiranController::class)->name('kehadiran');
 });
 
 Route::middleware('auth')->group(function () {

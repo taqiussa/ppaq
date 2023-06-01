@@ -1,20 +1,20 @@
 import { toInteger } from "lodash";
 
 
-export function arrayGunabayar() {
+export function arrayBulan() {
     const bulan = [
-        { id: 1, nama: 'SPP Bulan Juli' },
-        { id: 2, nama: 'SPP Bulan Agustus' },
-        { id: 3, nama: 'SPP Bulan September' },
-        { id: 4, nama: 'SPP Bulan Oktober' },
-        { id: 5, nama: 'SPP Bulan November' },
-        { id: 6, nama: 'SPP Bulan Desember' },
-        { id: 7, nama: 'SPP Bulan Januari' },
-        { id: 8, nama: 'SPP Bulan Februari' },
-        { id: 9, nama: 'SPP Bulan Maret' },
-        { id: 10, nama: 'SPP Bulan April' },
-        { id: 11, nama: 'SPP Bulan Mei' },
-        { id: 12, nama: 'SPP Bulan Juni' }
+        { id: 1, nama: 'Muharram' },
+        { id: 2, nama: 'Shafar' },
+        { id: 3, nama: 'Rabiul Awwal' },
+        { id: 4, nama: 'Rabiul Akhir' },
+        { id: 5, nama: 'Jumadil Awwal' },
+        { id: 6, nama: 'Jumadil Akhir' },
+        { id: 7, nama: 'Rajab' },
+        { id: 8, nama: "Sya'ban" },
+        { id: 9, nama: 'Ramadhan' },
+        { id: 10, nama: 'Syawwal' },
+        { id: 11, nama: "Dzulqo'dah" },
+        { id: 12, nama: 'Dzulhijjah' }
     ]
     return bulan
 }

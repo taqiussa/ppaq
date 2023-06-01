@@ -9,6 +9,7 @@ const SidebarSantri = ({ closeSide }) => {
             </div>
             <div>
                 <SidebarLink closeSide={closeSide} href={route('administrasi')} active={route().current('administrasi')} label='administrasi' />
+                <SidebarLink closeSide={closeSide} href={route('kehadiran')} active={route().current('kehadiran')} label='kehadiran' />
             </div>
         </div>
     )
