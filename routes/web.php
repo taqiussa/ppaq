@@ -8,6 +8,7 @@ use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\GetDataSantriController;
 use App\Http\Controllers\InputAbsensiController;
+use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
 use App\Http\Controllers\InputPembayaranController;
 use App\Http\Controllers\KehadiranController;
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     // Route Get Data
     Route::controller(GetDataController::class)->group(function () {
         Route::post('get-absensi', 'get_absensi')->name('get-absensi');
+        Route::post('get-bilhifzhi', 'get_bilhifzhi')->name('get-bilhifzhi');
         Route::post('get-binnadzor', 'get_binnadzor')->name('get-binnadzor');
         Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
     });
@@ -116,6 +118,13 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('input-absensi', 'index')->name('input-absensi');
         Route::post('input-absensi', 'simpan')->name('input-absensi.simpan');
         Route::delete('input-absensi', 'hapus')->name('input-absensi.hapus');
+    });
+
+    // Route Input Binnadzor
+    Route::controller(InputBilhifzhiController::class)->group(function () {
+        Route::get('input-bilhifzhi', 'index')->name('input-bilhifzhi');
+        Route::post('input-bilhifzhi', 'simpan')->name('input-bilhifzhi.simpan');
+        Route::delete('input-bilhifzhi', 'hapus')->name('input-bilhifzhi.hapus');
     });
 
     // Route Input Binnadzor

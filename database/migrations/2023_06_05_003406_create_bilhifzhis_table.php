@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('tahun', 30);
             $table->string('bulan', 3);
+            $table->foreignId('nis');
             $table->foreignId('kategori_id', 30);
             $table->string('juz', 3);
             $table->timestamps();

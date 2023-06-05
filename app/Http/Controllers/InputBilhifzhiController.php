@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Binnadzor;
+use App\Models\Bilhifzhi;
+use App\Models\Kategori;
 use App\Traits\InitTrait;
 
-class InputBinnadzorController extends Controller
+class InputBilhifzhiController extends Controller
 {
     use InitTrait;
 
     public function index()
     {
-        return inertia('InputBinnadzor', [
+        return inertia('InputBilhifzhi', [
             'initTahun' => $this->data_tahun_hijriyah(),
             'initBulan' => $this->data_bulan_hijriyah(),
-            'listSantri' => $this->data_all_santri()
+            'listKategori' => Kategori::get(),
+            'listSantri' => $this->data_all_santri(),
         ]);
     }
 
@@ -25,24 +27,27 @@ class InputBinnadzorController extends Controller
             'tahun' => 'required',
             'nis' => 'required',
             'bulan' => 'required',
+            'kategoriId' => 'required',
             'juz' => 'required',
         ]);
 
-        Binnadzor::create([
+        Bilhifzhi::create([
             'tanggal' => request('tanggal'),
             'tahun' => request('tahun'),
             'nis' => request('nis'),
             'bulan' => request('bulan'),
+            'kategori_id' => request('kategoriId'),
             'juz' => request('juz'),
         ]);
 
-        return to_route('input-binnadzor');
+        return to_route('input-bilhifzhi');
+
     }
 
     public function hapus()
     {
-        Binnadzor::destroy(request('id'));
+        Bilhifzhi::destroy(request('id'));
 
-        return to_route('input-binnadzor');
+        return to_route('input-bilhifzhi');
     }
 }

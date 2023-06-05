@@ -2,12 +2,13 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import Bulan from '@/Components/Sia/Bulan'
 import Hapus from '@/Components/Sia/Hapus'
 import Juz from '@/Components/Sia/Juz'
+import Kategori from '@/Components/Sia/Kategori'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
 import { hariTanggal, namaBulanHijriyah } from '@/Functions/functions'
-import getBinnadzor from '@/Functions/getBinnadzor'
+import getBilhifzhi from '@/Functions/getBilhifzhi'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import moment from 'moment/moment'
@@ -16,15 +17,16 @@ import { useEffect } from 'react'
 import { trackPromise } from 'react-promise-tracker'
 import { toast } from 'react-toastify'
 
-const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
+const InputBilhifzhi = ({ initTahun, initBulan, listSantri, listKategori }) => {
 
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tanggal: moment(new Date()).format('YYYY-MM-DD'),
         tahun: initTahun,
         bulan: initBulan,
+        kategoriId: '',
         nis: '',
         juz: '',
-        listBinnadzor: []
+        listBilhifzhi: []
     })
 
     const options = listSantri.map((santri) => ({
@@ -32,9 +34,9 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
         label: santri.name
     }))
 
-    async function getDataBinnadzor() {
-        const response = await getBinnadzor(data.nis)
-        setData({ ...data, listBinnadzor: response.listBinnadzor })
+    async function getDataBilhifzhi() {
+        const response = await getBilhifzhi(data.nis, data.kategoriId)
+        setData({ ...data, listBilhifzhi: response.listBilhifzhi })
     }
 
     const onHandleChange = (e) => {
@@ -44,12 +46,12 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
     const submit = (e) => {
         e.preventDefault()
 
-        post(route('input-binnadzor.simpan'),
+        post(route('input-bilhifzhi.simpan'),
             {
                 onSuccess: () => {
-                    toast.success('Berhasil Simpan Binnadzor')
+                    toast.success('Berhasil Simpan Bilhifzhi')
                     setData({ ...data })
-                    trackPromise(getDataBinnadzor())
+                    trackPromise(getDataBilhifzhi())
                 }
             })
     }
@@ -66,27 +68,26 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
             })
             .then((result) => {
                 if (result.isConfirmed)
-                    destroy(route('input-binnadzor.hapus', { id: id }),
+                    destroy(route('input-bilhifzhi.hapus', { id: id }),
                         {
                             onSuccess: () => {
-                                toast.success('Berhasil Hapus Data Binnadzor')
+                                toast.success('Berhasil Hapus Data Bilhifzhi')
                                 setData({ ...data })
-                                trackPromise(getDataBinnadzor())
+                                trackPromise(getDataBilhifzhi())
                             }
                         })
             })
     }
 
-
     useEffect(() => {
-        if (data.tahun && data.nis)
-            trackPromise(getDataBinnadzor())
-    }, [data.tahun, data.nis])
+        if (data.tahun && data.nis && data.kategoriId)
+            trackPromise(getDataBilhifzhi())
+    }, [data.tahun, data.nis, data.kategoriId])
 
     return (
         <>
-            <Head title='Input Binnadzor' />
-            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input binnadzor</div>
+            <Head title='Input Bilhifzhi' />
+            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input bilhifzhi</div>
             <form onSubmit={submit}>
 
                 <div className='lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3 pb-2'>
@@ -127,6 +128,15 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
                         onChange={(e) => setData({ ...data, nis: e ?? '' })}
                     />
 
+                    <Kategori
+                        id='kategoriId'
+                        name='kategoriId'
+                        value={data.kategoriId}
+                        message={errors.kategoriId}
+                        listKategori={listKategori}
+                        handleChange={onHandleChange}
+                    />
+
                     <Juz
                         id='juz'
                         name='juz'
@@ -163,26 +173,26 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.listBinnadzor && data.listBinnadzor.map((binnadzor, index) => (
+                        {data.listBilhifzhi && data.listBilhifzhi.map((bilhifzhi, index) => (
                             <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
                                 <td className="py-2 px-2 font-medium text-slate-600 text-center">
                                     {index + 1}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {binnadzor.juz}
+                                    {bilhifzhi.juz}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {hariTanggal(binnadzor.tanggal)}
+                                    {hariTanggal(bilhifzhi.tanggal)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {namaBulanHijriyah(binnadzor.bulan)}
+                                    {namaBulanHijriyah(bilhifzhi.bulan)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {binnadzor.tahun}
+                                    {bilhifzhi.tahun}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {data.listBinnadzor &&
-                                        <Hapus onClick={() => handleDelete(binnadzor.id)} />
+                                    {data.listBilhifzhi &&
+                                        <Hapus onClick={() => handleDelete(bilhifzhi.id)} />
                                     }
                                 </td>
                             </tr>
@@ -194,5 +204,5 @@ const InputBinnadzor = ({ initTahun, initBulan, listSantri }) => {
     )
 }
 
-InputBinnadzor.layout = page => <AppLayout children={page} />
-export default InputBinnadzor
+InputBilhifzhi.layout = page => <AppLayout children={page} />
+export default InputBilhifzhi

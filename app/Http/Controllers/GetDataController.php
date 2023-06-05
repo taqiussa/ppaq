@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Bilhifzhi;
 use App\Models\Binnadzor;
 
 class GetDataController extends Controller
@@ -12,6 +13,16 @@ class GetDataController extends Controller
         return response()->json([
             'listAbsensi' => Absensi::whereTahun(request('tahun'))
                 ->whereBulan(request('bulan'))
+                ->get()
+        ]);
+    }
+
+    public function get_bilhifzhi()
+    {
+        return response()->json([
+            'listBilhifzhi' => Bilhifzhi::whereNis(request('nis'))
+                ->whereKategoriId(request('kategoriId'))
+                ->latest()
                 ->get()
         ]);
     }
