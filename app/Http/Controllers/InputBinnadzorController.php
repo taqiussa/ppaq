@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
+use App\Models\Binnadzor;
 use App\Traits\InitTrait;
 
-class InputAbsensiController extends Controller
+class InputBinnadzorController extends Controller
 {
     use InitTrait;
 
     public function index()
     {
-        return inertia('InputAbsensi', [
+        return inertia('InputBinnadzor', [
             'initTahun' => $this->data_tahun_hijriyah(),
             'initBulan' => $this->data_bulan_hijriyah(),
             'listSantri' => $this->data_all_santri()
@@ -21,31 +21,26 @@ class InputAbsensiController extends Controller
     public function simpan()
     {
         request()->validate([
+            'tanggal' => 'required',
             'tahun' => 'required',
             'nis' => 'required',
             'bulan' => 'required',
-            'hadir' => 'required',
-            'sakit' => 'required',
-            'izin' => 'required',
-            'pulang' => 'required',
+            'juz' => 'required',
         ]);
 
-        Absensi::create([
+        Binnadzor::create([
+            'tanggal' => request('tanggal'),
             'tahun' => request('tahun'),
             'nis' => request('nis'),
             'bulan' => request('bulan'),
-            'hadir' => request('hadir'),
-            'sakit' => request('sakit'),
-            'izin' => request('izin'),
-            'pulang' => request('pulang'),
-            'user_id' => auth()->user()->id
+            'juz' => request('juz'),
         ]);
     }
 
     public function hapus()
     {
-        Absensi::destroy(request('id'));
+        Binnadzor::destroy(request('id'));
 
-        return to_route('input-absensi');
+        return to_route('input-binnadzor');
     }
 }

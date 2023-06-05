@@ -68,6 +68,38 @@ export function namaBulan(bulan) {
     return new Date(0, bulanNumber).toLocaleDateString('id-ID', { month: 'long' });
 }
 
+
+export function namaBulanHijriyah(bulan) {
+    switch (bulan) {
+        case '1':
+            return 'Muharram';
+        case '2':
+            return 'Shafar';
+        case '3':
+            return 'Rabiul Awwal';
+        case '4':
+            return 'Rabiul Akhir';
+        case '5':
+            return 'Jumadil Awwal';
+        case '6':
+            return 'Jumadil Akhir';
+        case '7':
+            return 'Rajab';
+        case '8':
+            return "Sya'ban";
+        case '9':
+            return 'Ramadhan';
+        case '10':
+            return 'Syawwal';
+        case '11':
+            return "Dzulqo'dah";
+        case '12':
+            return 'Dzulhijjah';
+        default:
+            return '';
+    }
+}
+
 export function namaHari(hari) {
     switch (hari) {
         case 1:
