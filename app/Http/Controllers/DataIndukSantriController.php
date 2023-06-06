@@ -12,7 +12,7 @@ class DataIndukSantriController extends Controller
     public function index()
     {
         return inertia(
-            'Pengurus/DataIndukSantri',
+            'DataIndukSantri',
             [
                 'listSantri' => User::where('nis', '!=', null)
                     ->with([

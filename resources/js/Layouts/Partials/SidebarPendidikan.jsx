@@ -9,6 +9,8 @@ const SidebarPendidikan = ({ closeSide }) => {
             </div>
             <div>
                 <SidebarLink closeSide={closeSide} href={route('input-absensi')} active={route().current('input-absensi')} label='input absensi' />
+                <SidebarLink closeSide={closeSide} href={route('input-bilhifzhi')} active={route().current('input-bilhifzhi')} label='input bilhifzhi' />
+                <SidebarLink closeSide={closeSide} href={route('input-binnadzor')} active={route().current('input-binnadzor')} label='input binnadzor' />
             </div>
         </div>
     )
