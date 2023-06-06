@@ -63,33 +63,39 @@ const Administrasi = ({ initTahun }) => {
                                 Jumlah Pembayaran
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Belum Dibayar
+                                Keterangan
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.listWajibBayar &&
-                            data.listWajibBayar.map((wajib, index) => (
-                                <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
-                                    <td className="py-2 px-2 font-medium text-slate-600 text-center">
-                                        {index + 1}
-                                    </td>
-                                    <td className="py-2 px-2 font-medium text-slate-600">
-                                        {wajib.kategori_pembayaran?.nama}
-                                    </td>
-                                    <td className="py-2 px-2 font-medium text-slate-600">
-                                        {rupiah(wajib.jumlah)}
-                                    </td>
-                                    <td className="py-2 px-2 font-medium text-slate-600">
-                                        {data.listPembayaran && rupiah(penjumlahan(data.listPembayaran.filter(bayar => bayar.kategori_pembayaran_id == wajib.kategori_pembayaran_id), 'jumlah'))
-                                        }
-                                    </td>
-                                    <td className="py-2 px-2 font-medium text-slate-600">
-                                        {rupiah(wajib.jumlah - penjumlahan(data.listPembayaran.filter(bayar => bayar.kategori_pembayaran_id == wajib.kategori_pembayaran_id), 'jumlah'))
-                                        }
-                                    </td>
-                                </tr>
-                            ))}
+                            data.listWajibBayar.map((wajib, index) => {
+
+                                const isLunas = penjumlahan(data.listPembayaran.filter(bayar => bayar.kategori_pembayaran_id == wajib.kategori_pembayaran_id), 'jumlah') >= wajib.jumlah
+
+                                return (
+                                    <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
+                                        <td className="py-2 px-2 font-medium text-slate-600 text-center">
+                                            {index + 1}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600">
+                                            {wajib.kategori_pembayaran?.nama}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600">
+                                            {rupiah(wajib.jumlah)}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600">
+                                            {data.listPembayaran && rupiah(penjumlahan(data.listPembayaran.filter(bayar => bayar.kategori_pembayaran_id == wajib.kategori_pembayaran_id), 'jumlah'))
+                                            }
+                                        </td>
+                                        <td className={`py-2 px-2 ${isLunas ? 'bg-emerald-500 text-white font-bold' : 'bg-red-500 text-white font-bold'}`}>
+                                            {
+                                                    isLunas ? 'Lunas' : 'Belum Lunas'
+                                            }
+                                        </td>
+                                    </tr>
+                                )
+                            })}
                         <tr className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
                             <td colSpan={4} className="py-2 px-2 font-bold text-slate-600">
                                 Total Wajib Bayar
