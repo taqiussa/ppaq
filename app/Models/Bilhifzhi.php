@@ -12,12 +12,22 @@ class Bilhifzhi extends Model
     protected $guarded = [];
 
     /**
+     * Get the kategori that owns the Bilhifzhi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class)->withDefault();
+    }
+
+    /**
      * Get the user that owns the Bilhifzhi
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class,'nis','nis')->withDefault();
+        return $this->belongsTo(User::class, 'nis', 'nis')->withDefault();
     }
 }

@@ -24,7 +24,7 @@ class ImportSantri implements ToCollection, WithHeadingRow, SkipsOnError, SkipsE
     public function collection(Collection $collection)
     {
         foreach ($collection as $row) {
-            User::create([
+            $user = User::create([
                 'name' => $row['nama'],
                 'nis' => $row['nis'],
                 'jenis_kelamin' => $row['jenis_kelamin'],
@@ -32,6 +32,8 @@ class ImportSantri implements ToCollection, WithHeadingRow, SkipsOnError, SkipsE
                 'username' => null,
                 'foto' => null
             ]);
+
+            $user->assignRole('Santri');
 
             Biodata::create([
                 'nis' => $row['nis'],

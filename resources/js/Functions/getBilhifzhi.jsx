@@ -3,7 +3,7 @@ import axios from "axios"
 const getBilhifzhi = async (nis, kategoriId) => {
     try {
         const response = await axios.post(
-            route('get-binnadzor',
+            route('get-bilhifzhi',
                 {
                     nis: nis,
                     kategoriId: kategoriId

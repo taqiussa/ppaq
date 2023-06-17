@@ -71,23 +71,23 @@ export function namaBulan(bulan) {
 
 export function namaBulanHijriyah(bulan) {
     switch (bulan) {
-        case '1':
+        case '01':
             return 'Muharram';
-        case '2':
+        case '02':
             return 'Shafar';
-        case '3':
+        case '03':
             return 'Rabiul Awwal';
-        case '4':
+        case '04':
             return 'Rabiul Akhir';
-        case '5':
+        case '05':
             return 'Jumadil Awwal';
-        case '6':
+        case '06':
             return 'Jumadil Akhir';
-        case '7':
+        case '07':
             return 'Rajab';
-        case '8':
+        case '08':
             return "Sya'ban";
-        case '9':
+        case '09':
             return 'Ramadhan';
         case '10':
             return 'Syawwal';

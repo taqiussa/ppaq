@@ -30,6 +30,7 @@ class AturWajibBayarController extends Controller
             'tahun' => request('tahun'),
             'jumlah' => ambilAngka(request('jumlah')),
             'kategori_pembayaran_id' => request('kategoriPembayaranId'),
+            'jenis_kelamin' => auth()->user()->jenis_kelamin,
         ]);
 
         return to_route('atur-wajib-bayar');

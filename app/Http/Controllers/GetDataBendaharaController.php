@@ -34,6 +34,7 @@ class GetDataBendaharaController extends Controller
     {
         return response()->json([
             'listWajibBayar' => WajibBayar::whereTahun(request('tahun'))
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
                 ->with(['kategoriPembayaran'])
                 ->get()
         ]);

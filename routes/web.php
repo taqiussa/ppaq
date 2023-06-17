@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\AturKategoriPembayaranController;
 use App\Http\Controllers\AturWajibBayarController;
+use App\Http\Controllers\BilhifzhiController;
+use App\Http\Controllers\BinnadzorController;
 use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\GetDataBendaharaController;
 use App\Http\Controllers\GetDataController;
@@ -103,7 +105,7 @@ Route::middleware(['auth', 'role:Bendahara'])->group(function () {
 });
 
 // Role Semua
-Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan|Santri'])->group(function () {
+Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan'])->group(function () {
 
     // Route Data Induk Santri
     Route::controller(DataIndukSantriController::class)->group(function () {
@@ -133,10 +135,22 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::post('input-binnadzor', 'simpan')->name('input-binnadzor.simpan');
         Route::delete('input-binnadzor', 'hapus')->name('input-binnadzor.hapus');
     });
+});
 
-    // Menu Santri
+
+// Menu Santri
+Route::middleware(['auth', 'role:Santri'])->group(function () {
+
     // Route Administrasi
     Route::get('administrasi', AdministrasiController::class)->name('administrasi');
+
+    // Route Bilhifzhi
+    Route::get('bilhifzhi', BilhifzhiController::class)->name('bilhifzhi');
+
+    // Route Binnadzor
+    Route::get('binnadzor', BinnadzorController::class)->name('binnadzor');
+
+    // Route Kehadiran
     Route::get('kehadiran', KehadiranController::class)->name('kehadiran');
 });
 

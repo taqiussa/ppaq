@@ -102,17 +102,19 @@ const InputPembayaran = ({ initTahun, listSantri }) => {
                 input pembayaran
             </div>
             <form onSubmit={submit}>
-                <div className='lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
+                <div className='lg:grid lg:grid-cols-5 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
 
-                    <SearchableSelect
-                        id='nis'
-                        name='nis'
-                        label='Nama Santri'
-                        value={data.nis}
-                        message={errors.nis}
-                        options={options}
-                        onChange={(e) => setData({ ...data, nis: e ?? '' })}
-                    />
+                    <div className="col-span-2">
+                        <SearchableSelect
+                            id='nis'
+                            name='nis'
+                            label='Nama Santri'
+                            value={data.nis}
+                            message={errors.nis}
+                            options={options}
+                            onChange={(e) => setData({ ...data, nis: e ?? '' })}
+                        />
+                    </div>
 
                     <Tahun
                         id='tahun'

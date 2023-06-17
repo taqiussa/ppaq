@@ -58,19 +58,28 @@ class InitSeeder extends Seeder
         $ketuaPutri->assignRole('Ketua');
 
         $bendahara = User::create([
-            'name' => 'Bendahara',
-            'username' => 'bendahara',
+            'name' => 'Bendahara Putri',
+            'username' => 'bendaharaputri',
             'password' => bcrypt('bendaharappaq'),
             'jenis_kelamin' => 'P',
         ]);
 
         $bendahara->assignRole('Bendahara');
+        
+        $bendaharaPutra = User::create([
+            'name' => 'Bendahara Putra',
+            'username' => 'bendaharaputra',
+            'password' => bcrypt('bendaharappaq'),
+            'jenis_kelamin' => 'L',
+        ]);
+
+        $bendaharaPutra->assignRole('Bendahara');
 
         $pengurus = User::create([
             'name' => 'Anggota Pengurus Putra',
             'username' => 'pengurusputra',
             'password' => bcrypt('pengurusppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'L',
         ]);
 
         $pengurus->assignRole('Pengurus');
@@ -79,7 +88,7 @@ class InitSeeder extends Seeder
             'name' => 'Anggota Pengurus Putri',
             'username' => 'pengurusputri',
             'password' => bcrypt('pengurusppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'P',
         ]);
 
         $pengurusPutri->assignRole('Pengurus');
@@ -88,7 +97,7 @@ class InitSeeder extends Seeder
             'name' => 'Keamanan Putra',
             'username' => 'keamananputra',
             'password' => bcrypt('keamananppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'L',
         ]);
 
         $keamanan->assignRole('Keamanan');
@@ -97,7 +106,7 @@ class InitSeeder extends Seeder
             'name' => 'Keamanan Putri',
             'username' => 'keamananputri',
             'password' => bcrypt('keamananppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'P',
         ]);
 
         $keamananputri->assignRole('Keamanan');
@@ -106,7 +115,7 @@ class InitSeeder extends Seeder
             'name' => 'Pendidikan Putra',
             'username' => 'pendidikanputra',
             'password' => bcrypt('pendidikanppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'L',
         ]);
 
         $pendidikan->assignRole('Pendidikan');
@@ -115,7 +124,7 @@ class InitSeeder extends Seeder
             'name' => 'Pendidikan Putri',
             'username' => 'pendidikanputri',
             'password' => bcrypt('pendidikanppaq'),
-            'jenis_kelamin' => '',
+            'jenis_kelamin' => 'P',
         ]);
 
         $pendidikanputri->assignRole('Pendidikan');

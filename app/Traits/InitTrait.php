@@ -8,7 +8,8 @@ trait InitTrait
 {
     public function data_all_santri()
     {
-        return User::where('nis', '!=', null)
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
             ->orderBy('jenis_kelamin')
             ->orderBy('name')
             ->get();
