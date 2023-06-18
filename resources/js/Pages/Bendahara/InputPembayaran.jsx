@@ -21,7 +21,7 @@ const InputPembayaran = ({ initTahun, listSantri }) => {
         tahun: initTahun,
         kategoriPembayaranId: '',
         nis: '',
-        jumlah: 0,
+        jumlah: '',
         listPembayaran: [],
         listKategori: []
     })

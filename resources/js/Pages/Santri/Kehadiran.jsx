@@ -27,7 +27,6 @@ const Kehadiran = ({ initTahun }) => {
             trackPromise(getDataAbsensi())
     }, [data.tahun])
 
-    console.log(data.listAbensi)
     return (
         <>
             <Head title='Kehadiran' />
@@ -56,13 +55,10 @@ const Kehadiran = ({ initTahun }) => {
                                 Hadir
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Sakit
-                            </th>
-                            <th scope='col' className="py-3 px-2 text-left">
                                 Izin
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Pulang
+                                Alpha
                             </th>
                         </tr>
                     </thead>
@@ -80,13 +76,10 @@ const Kehadiran = ({ initTahun }) => {
                                         {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.bulan == bulan.id).map(absensi => absensi.hadir)}
                                     </td>
                                     <td className="py-2 px-2 font-medium text-slate-600">
-                                        {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.bulan == bulan.id).map(absensi => absensi.sakit)}
-                                    </td>
-                                    <td className="py-2 px-2 font-medium text-slate-600">
                                         {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.bulan == bulan.id).map(absensi => absensi.izin)}
                                     </td>
                                     <td className="py-2 px-2 font-medium text-slate-600">
-                                        {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.bulan == bulan.id).map(absensi => absensi.pulang)}
+                                        {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.bulan == bulan.id).map(absensi => absensi.alpha)}
                                     </td>
                                 </tr>
                             ))}

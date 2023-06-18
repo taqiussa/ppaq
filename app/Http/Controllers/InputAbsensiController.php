@@ -25,9 +25,8 @@ class InputAbsensiController extends Controller
             'nis' => 'required',
             'bulan' => 'required',
             'hadir' => 'required',
-            'sakit' => 'required',
             'izin' => 'required',
-            'pulang' => 'required',
+            'alpha' => 'required',
         ]);
 
         Absensi::create([
@@ -35,9 +34,8 @@ class InputAbsensiController extends Controller
             'nis' => request('nis'),
             'bulan' => request('bulan'),
             'hadir' => request('hadir'),
-            'sakit' => request('sakit'),
             'izin' => request('izin'),
-            'pulang' => request('pulang'),
+            'alpha' => request('alpha'),
             'user_id' => auth()->user()->id
         ]);
     }

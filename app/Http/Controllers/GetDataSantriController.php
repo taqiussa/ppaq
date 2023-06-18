@@ -15,6 +15,7 @@ class GetDataSantriController extends Controller
                 ->whereNis(auth()->user()->nis)
                 ->get(),
             'listWajibBayar' => WajibBayar::whereTahun(request('tahun'))
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
                 ->with([
                     'kategoriPembayaran' => fn ($q) => $q->select('id', 'nama'),
                 ])

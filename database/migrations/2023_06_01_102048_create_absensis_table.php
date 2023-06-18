@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('tahun', 30);
             $table->string('bulan', 3);
             $table->integer('hadir');
-            $table->integer('sakit');
             $table->integer('izin');
-            $table->integer('pulang');
+            $table->integer('alpha');
             $table->timestamps();
         });
     }

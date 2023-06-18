@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Traits\InitTrait;
-use Illuminate\Http\Request;
-
 class AdministrasiController extends Controller
 {
     use InitTrait;
@@ -12,7 +10,7 @@ class AdministrasiController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         return inertia('Santri/Administrasi', ['initTahun' => $this->data_tahun_hijriyah()]);
     }

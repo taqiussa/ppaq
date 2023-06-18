@@ -20,9 +20,8 @@ const InputAbsensi = ({ initTahun, initBulan, listSantri }) => {
         bulan: initBulan,
         nis: '',
         hadir: 0,
-        sakit: 0,
         izin: 0,
-        pulang: 0,
+        alpha: 0,
         listAbsensi: []
     })
 
@@ -126,14 +125,6 @@ const InputAbsensi = ({ initTahun, initBulan, listSantri }) => {
                         handleChange={onHandleChange}
                     />
                     <InputText
-                        id='sakit'
-                        name='sakit'
-                        label='sakit'
-                        value={data.sakit}
-                        message={errors.sakit}
-                        handleChange={onHandleChange}
-                    />
-                    <InputText
                         id='izin'
                         name='izin'
                         label='izin'
@@ -142,11 +133,11 @@ const InputAbsensi = ({ initTahun, initBulan, listSantri }) => {
                         handleChange={onHandleChange}
                     />
                     <InputText
-                        id='pulang'
-                        name='pulang'
-                        label='pulang'
-                        value={data.pulang}
-                        message={errors.pulang}
+                        id='alpha'
+                        name='alpha'
+                        label='alpha'
+                        value={data.alpha}
+                        message={errors.alpha}
                         handleChange={onHandleChange}
                     />
 
@@ -167,13 +158,10 @@ const InputAbsensi = ({ initTahun, initBulan, listSantri }) => {
                                 Hadir
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Sakit
-                            </th>
-                            <th scope='col' className="py-3 px-2 text-left">
                                 Izin
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
-                                Pulang
+                                Alpha
                             </th>
                             <th scope='col' className="py-3 px-2 text-left">
                                 Aksi
@@ -193,13 +181,10 @@ const InputAbsensi = ({ initTahun, initBulan, listSantri }) => {
                                     {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi => absensi.hadir)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi => absensi.sakit)}
-                                </td>
-                                <td className="py-2 px-2 font-medium text-slate-600">
                                     {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi => absensi.izin)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi => absensi.pulang)}
+                                    {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi => absensi.alpha)}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
                                     {data.listAbsensi && data.listAbsensi.filter(absensi => absensi.nis == santri.nis).map(absensi =>
