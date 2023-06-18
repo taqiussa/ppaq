@@ -1,11 +1,11 @@
 import SidebarLink from '@/Components/Sia/SidebarLink'
 import React from 'react'
 
-const SidebarKetua = ({ closeSide }) => {
+const SidebarSekretaris = ({ closeSide }) => {
     return (
         <div className='py-1'>
             <div className='text-slate-600 font-bold'>
-                Ketua Pengurus
+                Sekretaris
             </div>
             <div>
                 <SidebarLink closeSide={closeSide} href={route('atur-boyong')} active={route().current('atur-boyong')} label='atur boyong' />
@@ -17,4 +17,4 @@ const SidebarKetua = ({ closeSide }) => {
     )
 }
 
-export default SidebarKetua
+export default SidebarSekretaris

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('jenis_kelamin', 2);
             $table->string('foto')->nullable();
+            $table->boolean('aktif')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

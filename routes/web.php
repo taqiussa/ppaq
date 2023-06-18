@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AturBoyongController;
+use App\Http\Controllers\DataIndukAlumniController;
 use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
@@ -31,6 +33,15 @@ Route::get('/dashboard', function () {
 
 // Role Semua
 Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan'])->group(function () {
+
+    // Route Atur Boyong
+    Route::controller(AturBoyongController::class)->group(function () {
+        Route::get('atur-boyong', 'index')->name('atur-boyong');
+        Route::post('atur-boyong', 'simpan')->name('atur-boyong.simpan');
+    });
+
+    // Route Data Induk Alumni
+    Route::get('data-induk-alumni', DataIndukAlumniController::class)->name('data-induk-alumni');
 
     // Route Data Induk Santri
     Route::controller(DataIndukSantriController::class)->group(function () {

@@ -16,6 +16,7 @@ class InitSeeder extends Seeder
         $data = [
             'Admin',
             'Ketua',
+            'Sekretaris',
             'Bendahara',
             'Pengurus',
             'Keamanan',
@@ -38,7 +39,7 @@ class InitSeeder extends Seeder
         ]);
 
         $user->assignRole('Admin');
-        
+
         $ketua = User::create([
             'name' => 'Ketua Pengurus Putra',
             'username' => 'ketuaputra',
@@ -57,6 +58,24 @@ class InitSeeder extends Seeder
 
         $ketuaPutri->assignRole('Ketua');
 
+        $sekretaris = User::create([
+            'name' => 'Sekretaris Putra',
+            'username' => 'sekretarisputra',
+            'password' => bcrypt('sekretarisppaq'),
+            'jenis_kelamin' => 'L',
+        ]);
+
+        $sekretaris->assignRole('Ketua');
+
+        $sekretarisPutri = User::create([
+            'name' => 'Sekretaris Putri',
+            'username' => 'sekretarisputri',
+            'password' => bcrypt('sekretarisppaq'),
+            'jenis_kelamin' => 'P',
+        ]);
+
+        $sekretarisPutri->assignRole('Ketua');
+
         $bendahara = User::create([
             'name' => 'Bendahara Putri',
             'username' => 'bendaharaputri',
@@ -65,7 +84,7 @@ class InitSeeder extends Seeder
         ]);
 
         $bendahara->assignRole('Bendahara');
-        
+
         $bendaharaPutra = User::create([
             'name' => 'Bendahara Putra',
             'username' => 'bendaharaputra',

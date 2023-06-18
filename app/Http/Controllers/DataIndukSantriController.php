@@ -14,14 +14,7 @@ class DataIndukSantriController extends Controller
         return inertia(
             'Pengurus/DataIndukSantri',
             [
-                'listSantri' => User::where('nis', '!=', null)
-                    ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-                    ->with([
-                        'biodata',
-                        'alamat'
-                    ])
-                    ->orderBy('name')
-                    ->get(),
+                'listSantri' => $this->data_all_santri(),
                 'initTahun' => $this->data_tahun_hijriyah(),
                 'initBulan' => $this->data_bulan_hijriyah()
             ]

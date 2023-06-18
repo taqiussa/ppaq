@@ -6,11 +6,42 @@ use App\Models\User;
 
 trait InitTrait
 {
+    public function data_all_alumni()
+    {
+        return User::whereNotNull('nis')
+            ->whereAktif(false)
+            ->with([
+                'alamat',
+                'alumni',
+                'biodata',
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function data_alumni()
+    {
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+            ->whereAktif(false)
+            ->with([
+                'alamat',
+                'alumni',
+                'biodata',
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function data_all_santri()
     {
         return User::whereNotNull('nis')
             ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->orderBy('jenis_kelamin')
+            ->whereAktif(true)
+            ->with([
+                'biodata',
+                'alamat'
+            ])
             ->orderBy('name')
             ->get();
     }

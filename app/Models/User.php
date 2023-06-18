@@ -49,6 +49,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the alumni associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function alumni(): HasOne
+    {
+        return $this->hasOne(Alumni::class, 'nis', 'nis');
+    }
+
+    /**
      * Get the biodata associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
