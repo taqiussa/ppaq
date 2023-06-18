@@ -11,7 +11,7 @@ class InputAbsensiController extends Controller
 
     public function index()
     {
-        return inertia('InputAbsensi', [
+        return inertia('Pengurus/InputAbsensi', [
             'initTahun' => $this->data_tahun_hijriyah(),
             'initBulan' => $this->data_bulan_hijriyah(),
             'listSantri' => $this->data_all_santri()

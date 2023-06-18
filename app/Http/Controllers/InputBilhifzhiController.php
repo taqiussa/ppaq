@@ -12,7 +12,7 @@ class InputBilhifzhiController extends Controller
 
     public function index()
     {
-        return inertia('InputBilhifzhi', [
+        return inertia('Pengurus/InputBilhifzhi', [
             'initTahun' => $this->data_tahun_hijriyah(),
             'initBulan' => $this->data_bulan_hijriyah(),
             'listKategori' => Kategori::get(),

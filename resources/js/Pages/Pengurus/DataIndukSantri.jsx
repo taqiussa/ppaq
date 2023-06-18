@@ -1,4 +1,5 @@
 import InputText from '@/Components/Sia/InputText'
+import LinkEdit from '@/Components/Sia/LinkEdit'
 import { tanggal } from '@/Functions/functions'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
@@ -72,6 +73,9 @@ const DataIndukSantri = ({ listSantri }) => {
                             <th scope='col' className="py-3 px-2 text-left">
                                 Alamat
                             </th>
+                            <th scope='col' className="py-3 px-2 text-left">
+                                Aksi
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,6 +104,9 @@ const DataIndukSantri = ({ listSantri }) => {
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
                                             {santri.alamat?.alamat ?? '-'}, RT {santri.alamat?.rt ?? '-'} RW {santri.alamat?.rw ?? '-'} Desa {santri.alamat?.desa} - Kec. {santri.alamat?.kecamatan} - Kab. {santri.alamat?.kabupaten} - Prov. {santri.alamat?.provinsi}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600">
+                                            <LinkEdit href={route('edit-santri', { nis: santri.nis })} />
                                         </td>
                                     </tr>
                                 ))}

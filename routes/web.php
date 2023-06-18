@@ -1,23 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdministrasiController;
-use App\Http\Controllers\AturKategoriPembayaranController;
-use App\Http\Controllers\AturWajibBayarController;
-use App\Http\Controllers\BilhifzhiController;
-use App\Http\Controllers\BinnadzorController;
 use App\Http\Controllers\DataIndukSantriController;
-use App\Http\Controllers\GetDataBendaharaController;
-use App\Http\Controllers\GetDataController;
-use App\Http\Controllers\GetDataSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
-use App\Http\Controllers\InputPembayaranController;
-use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RekapPembayaranController;
-use App\Http\Controllers\UploadSantriController;
-use App\Models\User;
+use App\Http\Controllers\TambahSantriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,71 +27,6 @@ Route::get('/dashboard', function () {
     return inertia('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Get Data
-Route::middleware(['auth'])->group(function () {
-
-    // Route Get Data
-    Route::controller(GetDataController::class)->group(function () {
-        Route::post('get-absensi', 'get_absensi')->name('get-absensi');
-        Route::post('get-bilhifzhi', 'get_bilhifzhi')->name('get-bilhifzhi');
-        Route::post('get-binnadzor', 'get_binnadzor')->name('get-binnadzor');
-        Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
-    });
-
-    // Route Get Data Bendahara
-    Route::controller(GetDataBendaharaController::class)->group(function () {
-        Route::post('get-all-pembayaran', 'get_all_pembayaran')->name('get-all-pembayaran');
-        Route::post('get-pembayaran', 'get_pembayaran')->name('get-pembayaran');
-        Route::post('get-wajib-bayar', 'get_wajib_bayar')->name('get-wajib-bayar');
-    });
-
-    // Route Get Data Santri
-    Route::controller(GetDataSantriController::class)->group(function () {
-        Route::post('get-administrasi', 'get_administrasi')->name('get-administrasi');
-        Route::post('get-kehadiran', 'get_kehadiran')->name('get-kehadiran');
-    });
-});
-
-// Role Admin
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-
-    Route::controller(UploadSantriController::class)->group(function () {
-        Route::get('upload-santri', 'index')->name('upload-santri');
-        Route::post('upload-santri', 'upload')->name('upload-santri.upload');
-    });
-});
-
-// Role Bendahara
-Route::middleware(['auth', 'role:Bendahara'])->group(function () {
-
-    // Route Atur Kategori Pembayaran
-    Route::controller(AturKategoriPembayaranController::class)->group(function () {
-        Route::get('atur-kategori-pembayaran', 'index')->name('atur-kategori-pembayaran');
-        Route::post('atur-kategori-pembayaran', 'simpan')->name('atur-kategori-pembayaran.simpan');
-        Route::delete('atur-kategori-pembayaran', 'hapus')->name('atur-kategori-pembayaran.hapus');
-    });
-
-    // Route Atur Wajib Bayar
-    Route::controller(AturWajibBayarController::class)->group(function () {
-        Route::get('atur-wajib-bayar', 'index')->name('atur-wajib-bayar');
-        Route::post('atur-wajib-bayar', 'simpan')->name('atur-wajib-bayar.simpan');
-        Route::delete('atur-wajib-bayar', 'hapus')->name('atur-wajib-bayar.hapus');
-    });
-
-    // Route Atur Wajib Bayar
-    Route::controller(InputPembayaranController::class)->group(function () {
-        Route::get('input-pembayaran', 'index')->name('input-pembayaran');
-        Route::post('input-pembayaran', 'simpan')->name('input-pembayaran.simpan');
-        Route::delete('input-pembayaran', 'hapus')->name('input-pembayaran.hapus');
-    });
-
-    // Route Rekap Pembayaran
-    Route::controller(RekapPembayaranController::class)->group(function () {
-        Route::get('rekap-pembayaran', 'index')->name('rekap-pembayaran');
-        Route::delete('rekap-pembayaran', 'hapus')->name('rekap-pembayaran.hapus');
-    });
-});
-
 // Role Semua
 Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan'])->group(function () {
 
@@ -113,6 +36,7 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('data-induk-santri/edit', 'edit')->name('data-induk-santri.edit');
         Route::put('data-induk-santri', 'update')->name('data-induk-santri.update');
         Route::post('data-induk-santri', 'simpan')->name('data-induk-santri.simpan');
+        Route::delete('data-induk-santri', 'hapus')->name('data-induk-santri.hapus');
     });
 
     // Route Input Absensi
@@ -135,23 +59,16 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::post('input-binnadzor', 'simpan')->name('input-binnadzor.simpan');
         Route::delete('input-binnadzor', 'hapus')->name('input-binnadzor.hapus');
     });
-});
 
+    // Route Tambah Santri
+    Route::controller(TambahSantriController::class)->group(function () {
+        Route::get('tambah-santri', 'index')->name('tambah-santri');
+        Route::post('tambah-santri', 'simpan')->name('tambah-santri.simpan');
 
-// Menu Santri
-Route::middleware(['auth', 'role:Santri'])->group(function () {
-
-    // Route Administrasi
-    Route::get('administrasi', AdministrasiController::class)->name('administrasi');
-
-    // Route Bilhifzhi
-    Route::get('bilhifzhi', BilhifzhiController::class)->name('bilhifzhi');
-
-    // Route Binnadzor
-    Route::get('binnadzor', BinnadzorController::class)->name('binnadzor');
-
-    // Route Kehadiran
-    Route::get('kehadiran', KehadiranController::class)->name('kehadiran');
+        //Edit
+        Route::get('edit-santri', 'edit')->name('edit-santri');
+        Route::post('edit-santri', 'update')->name('edit-santri.update');
+    });
 });
 
 Route::middleware('auth')->group(function () {
@@ -160,4 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/bendahara.php';
+require __DIR__ . '/data.php';
+require __DIR__ . '/santri.php';

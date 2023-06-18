@@ -9,6 +9,7 @@ const SidebarKetua = ({ closeSide }) => {
             </div>
             <div>
                 <SidebarLink closeSide={closeSide} href={route('data-induk-santri')} active={route().current('data-induk-santri')} label='data induk santri' />
+                <SidebarLink closeSide={closeSide} href={route('tambah-santri')} active={route().current('tambah-santri')} label='tambah santri' />
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('nis');
             $table->string('nisn', 40)->nullable();
             $table->string('nik', 40)->nullable();
-            $table->string('tempat_lahir', 100);
+            $table->string('tempat_lahir', 100)->nullable();
             $table->date('tanggal_lahir');
             $table->string('no_kk', 40)->nullable();
             $table->string('nama_ayah')->nullable();
