@@ -19,6 +19,7 @@ class GetDataSantriController extends Controller
                 ->with([
                     'kategoriPembayaran' => fn ($q) => $q->select('id', 'nama'),
                 ])
+                ->orderBy('kategori_pembayaran_id')
                 ->get()
         ]);
     }

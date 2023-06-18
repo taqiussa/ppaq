@@ -70,10 +70,6 @@ const Administrasi = ({ initTahun }) => {
                     <tbody>
                         {data.listWajibBayar &&
                             data.listWajibBayar
-                                .sort(() => {
-                                    const sequence = [10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-                                    return sequence
-                                })
                                 .map((wajib, index) => {
 
                                     const isLunas = penjumlahan(data.listPembayaran.filter(bayar => bayar.kategori_pembayaran_id == wajib.kategori_pembayaran_id), 'jumlah') >= wajib.jumlah

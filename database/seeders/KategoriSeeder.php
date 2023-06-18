@@ -43,16 +43,30 @@ class KategoriSeeder extends Seeder
             WajibBayar::create([
                 'kategori_pembayaran_id' => $i,
                 'tahun' => '1444 / 1445',
-                'jumlah' => 250000,
+                'jumlah' => 225000,
                 'jenis_kelamin' => 'L'
             ]);
 
             WajibBayar::create([
                 'kategori_pembayaran_id' => $i,
                 'tahun' => '1444 / 1445',
-                'jumlah' => 250000,
+                'jumlah' => 220000,
                 'jenis_kelamin' => 'P'
             ]);
         }
+
+        WajibBayar::create([
+            'kategori_pembayaran_id' => 13,
+            'tahun' => '1444 / 1445',
+            'jumlah' => 325000,
+            'jenis_kelamin' => 'L'
+        ]);
+
+        WajibBayar::create([
+            'kategori_pembayaran_id' => 13,
+            'tahun' => '1444 / 1445',
+            'jumlah' => 395000,
+            'jenis_kelamin' => 'P'
+        ]);
     }
 }
