@@ -19,6 +19,18 @@ export function arrayBulan() {
     return bulan
 }
 
+export function arraySemester() {
+    const semester = [
+        { semester: '1' },
+        { semester: '2' },
+        { semester: '3' },
+        { semester: '4' },
+        { semester: '5' },
+        { semester: '6' }
+    ]
+    return semester
+}
+
 export function gunabayar(id) {
     switch (id) {
         case '1':

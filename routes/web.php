@@ -4,6 +4,7 @@ use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
+use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahSantriController;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,13 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('input-binnadzor', 'index')->name('input-binnadzor');
         Route::post('input-binnadzor', 'simpan')->name('input-binnadzor.simpan');
         Route::delete('input-binnadzor', 'hapus')->name('input-binnadzor.hapus');
+    });
+
+    // Route Input Tes Semester
+    Route::controller(InputTesSemesterController::class)->group(function () {
+        Route::get('input-tes-semester', 'index')->name('input-tes-semester');
+        Route::post('input-tes-semester', 'simpan')->name('input-tes-semester.simpan');
+        Route::delete('input-tes-semester', 'hapus')->name('input-tes-semester.hapus');
     });
 
     // Route Tambah Santri

@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function Semester(
+export default forwardRef(function JuzSemester(
     { name, id, value, message, className, required, isFocused, handleChange },
     ref
 ) {
@@ -15,13 +15,12 @@ export default forwardRef(function Semester(
 
         }
 
-
     }, []);
 
     return (
         <div className='flex flex-col text-slate-600 capitalize'>
             <div>
-                semester
+                juz
             </div>
             <div>
                 <select
@@ -34,16 +33,16 @@ export default forwardRef(function Semester(
                     }
                     ref={input}
                     required={required}
-                    onChange={(e) => handleChange(e)}>
+                    onChange={(e) => handleChange(e)}
+                >
 
-                    <option value="">Pilih Semester</option>
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
+                    <option value="">Pilih Juz</option>
+                    <option value="1-5">1-5</option>
+                    <option value="6-10">6-10</option>
+                    <option value="11-15">11-15</option>
+                    <option value="16-20">16-20</option>
+                    <option value="21-25">21-25</option>
+                    <option value="26-30">26-30</option>
 
                 </select>
             </div>
