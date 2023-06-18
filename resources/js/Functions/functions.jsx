@@ -66,6 +66,24 @@ export function hariTanggal(tanggal) {
     return new Date(tanggal).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 }
 
+export function kategoriBilhifzhi(kategori) {
+    switch (kategori) {
+        case 1:
+            return 'Ziyadah';
+        default:
+            return "Muroja'ah";
+    }
+}
+
+export function kategoriHalaqoh(kategori) {
+    switch (kategori) {
+        case 1:
+            return 'Kelas MTQ';
+        default:
+            return 'Tashih MTQ';
+    }
+}
+
 export function maskRupiah(angka) {
     // Remove all non-numeric characters
     const numericValue = angka.replace(/\D/g, '')

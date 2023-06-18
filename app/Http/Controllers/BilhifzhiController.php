@@ -17,7 +17,6 @@ class BilhifzhiController extends Controller
                 'listBilhifzhi'
                 =>
                 Bilhifzhi::whereNis(auth()->user()->nis)
-                    ->with(['kategori'])
                     ->orderByDesc('tanggal')->get()
             ]
         );

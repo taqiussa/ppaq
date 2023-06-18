@@ -4,6 +4,7 @@ use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
+use App\Http\Controllers\InputHalaqohController;
 use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahSantriController;
@@ -59,6 +60,14 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('input-binnadzor', 'index')->name('input-binnadzor');
         Route::post('input-binnadzor', 'simpan')->name('input-binnadzor.simpan');
         Route::delete('input-binnadzor', 'hapus')->name('input-binnadzor.hapus');
+    });
+
+
+    // Route Input Halaqoh
+    Route::controller(InputHalaqohController::class)->group(function () {
+        Route::get('input-halaqoh', 'index')->name('input-halaqoh');
+        Route::post('input-halaqoh', 'simpan')->name('input-halaqoh.simpan');
+        Route::delete('input-halaqoh', 'hapus')->name('input-halaqoh.hapus');
     });
 
     // Route Input Tes Semester

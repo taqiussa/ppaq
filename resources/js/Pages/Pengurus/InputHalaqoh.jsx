@@ -2,13 +2,13 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import Bulan from '@/Components/Sia/Bulan'
 import Hapus from '@/Components/Sia/Hapus'
 import Juz from '@/Components/Sia/Juz'
-import KategoriBilhifzhi from '@/Components/Sia/KategoriBilhifzhi'
+import KategoriHalaqoh from '@/Components/Sia/KategoriHalaqoh'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
 import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
 import Tanggal from '@/Components/Sia/Tanggal'
 import { hariTanggal, namaBulanHijriyah } from '@/Functions/functions'
-import getBilhifzhi from '@/Functions/getBilhifzhi'
+import getHalaqoh from '@/Functions/getHalaqoh'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
 import moment from 'moment/moment'
@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 import { trackPromise } from 'react-promise-tracker'
 import { toast } from 'react-toastify'
 
-const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
+const InputHalaqoh = ({ initTahun, initBulan, listSantri }) => {
 
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tanggal: moment(new Date()).format('YYYY-MM-DD'),
@@ -26,7 +26,7 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
         kategoriId: '',
         nis: '',
         juz: '',
-        listBilhifzhi: []
+        listHalaqoh: []
     })
 
     const options = listSantri.map((santri) => ({
@@ -34,9 +34,9 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
         label: santri.name
     }))
 
-    async function getDataBilhifzhi() {
-        const response = await getBilhifzhi(data.nis, data.kategoriId)
-        setData({ ...data, listBilhifzhi: response.listBilhifzhi })
+    async function getDataHalaqoh() {
+        const response = await getHalaqoh(data.nis, data.kategoriId)
+        setData({ ...data, listHalaqoh: response.listHalaqoh })
     }
 
     const onHandleChange = (e) => {
@@ -46,12 +46,12 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
     const submit = (e) => {
         e.preventDefault()
 
-        post(route('input-bilhifzhi.simpan'),
+        post(route('input-halaqoh.simpan'),
             {
                 onSuccess: () => {
-                    toast.success('Berhasil Simpan Bilhifzhi')
+                    toast.success('Berhasil Simpan Halaqoh')
                     setData({ ...data })
-                    trackPromise(getDataBilhifzhi())
+                    trackPromise(getDataHalaqoh())
                 }
             })
     }
@@ -68,12 +68,12 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
             })
             .then((result) => {
                 if (result.isConfirmed)
-                    destroy(route('input-bilhifzhi.hapus', { id: id }),
+                    destroy(route('input-halaqoh.hapus', { id: id }),
                         {
                             onSuccess: () => {
-                                toast.success('Berhasil Hapus Data Bilhifzhi')
+                                toast.success('Berhasil Hapus Data Halaqoh')
                                 setData({ ...data })
-                                trackPromise(getDataBilhifzhi())
+                                trackPromise(getDataHalaqoh())
                             }
                         })
             })
@@ -81,13 +81,13 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
 
     useEffect(() => {
         if (data.tahun && data.nis && data.kategoriId)
-            trackPromise(getDataBilhifzhi())
+            trackPromise(getDataHalaqoh())
     }, [data.tahun, data.nis, data.kategoriId])
 
     return (
         <>
-            <Head title='Input Bilhifzhi' />
-            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input bilhifzhi</div>
+            <Head title='Input Halaqoh' />
+            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input halaqoh</div>
             <form onSubmit={submit}>
 
                 <div className='lg:grid lg:grid-cols-4 lg:gap-2 lg:space-y-0 space-y-3 pb-2'>
@@ -109,6 +109,7 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
                         message={errors.tahun}
                         handleChange={onHandleChange}
                     />
+
                     <Bulan
                         id='bulan'
                         name='bulan'
@@ -128,7 +129,7 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
                         onChange={(e) => setData({ ...data, nis: e ?? '' })}
                     />
 
-                    <KategoriBilhifzhi
+                    <KategoriHalaqoh
                         id='kategoriId'
                         name='kategoriId'
                         value={data.kategoriId}
@@ -172,7 +173,7 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.listBilhifzhi && data.listBilhifzhi.map((bilhifzhi, index) => (
+                        {data.listHalaqoh && data.listHalaqoh.map((bilhifzhi, index) => (
                             <tr key={index} className="bg-white border-b hover:bg-slate-300 odd:bg-slate-200">
                                 <td className="py-2 px-2 font-medium text-slate-600 text-center">
                                     {index + 1}
@@ -190,7 +191,7 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
                                     {bilhifzhi.tahun}
                                 </td>
                                 <td className="py-2 px-2 font-medium text-slate-600">
-                                    {data.listBilhifzhi &&
+                                    {data.listHalaqoh &&
                                         <Hapus onClick={() => handleDelete(bilhifzhi.id)} />
                                     }
                                 </td>
@@ -203,5 +204,5 @@ const InputBilhifzhi = ({ initTahun, initBulan, listSantri }) => {
     )
 }
 
-InputBilhifzhi.layout = page => <AppLayout children={page} />
-export default InputBilhifzhi
+InputHalaqoh.layout = page => <AppLayout children={page} />
+export default InputHalaqoh

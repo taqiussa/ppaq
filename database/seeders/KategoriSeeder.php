@@ -14,8 +14,8 @@ class KategoriSeeder extends Seeder
      */
     public function run(): void
     {
-        Kategori::create(['nama' => 'Ziyadah']);
-        Kategori::create(['nama' => 'Murojaah']);
+        // Kategori::create(['nama' => 'Ziyadah']);
+        // Kategori::create(['nama' => 'Murojaah']);
 
         $data = [
             "Syawwal",

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bilhifzhi;
-use App\Models\Kategori;
 use App\Traits\InitTrait;
 
 class InputBilhifzhiController extends Controller
@@ -15,7 +14,6 @@ class InputBilhifzhiController extends Controller
         return inertia('Pengurus/InputBilhifzhi', [
             'initTahun' => $this->data_tahun_hijriyah(),
             'initBulan' => $this->data_bulan_hijriyah(),
-            'listKategori' => Kategori::get(),
             'listSantri' => $this->data_all_santri(),
         ]);
     }
