@@ -9,6 +9,7 @@ use App\Http\Controllers\InputBinnadzorController;
 use App\Http\Controllers\InputHalaqohController;
 use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TambahAlumniController;
 use App\Http\Controllers\TambahSantriController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,16 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('input-tes-semester', 'index')->name('input-tes-semester');
         Route::post('input-tes-semester', 'simpan')->name('input-tes-semester.simpan');
         Route::delete('input-tes-semester', 'hapus')->name('input-tes-semester.hapus');
+    });
+
+    // Route Tambah Alumni
+    Route::controller(TambahAlumniController::class)->group(function () {
+        Route::get('tambah-alumni', 'index')->name('tambah-alumni');
+        Route::post('tambah-alumni', 'simpan')->name('tambah-alumni.simpan');
+
+        //Edit
+        Route::get('edit-alumni', 'edit')->name('edit-alumni');
+        Route::post('edit-alumni', 'update')->name('edit-alumni.update');
     });
 
     // Route Tambah Santri

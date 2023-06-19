@@ -11,7 +11,7 @@ export default forwardRef(function Tahun(
 
     const arrayTahun = () => {
         let i;
-        for (i = 1444; i <= Number(moment(new Date()).format('YYYY')) - 578; i++) {
+        for (i = 1435; i <= Number(moment(new Date()).format('YYYY')) - 578; i++) {
             arrTahun.push({
                 id: i,
                 tahun: i
