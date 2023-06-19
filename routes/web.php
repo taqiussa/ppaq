@@ -8,6 +8,8 @@ use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
 use App\Http\Controllers\InputHalaqohController;
 use App\Http\Controllers\InputTesSemesterController;
+use App\Http\Controllers\PrintPembayaranController;
+use App\Http\Controllers\PrintPendidikanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahAlumniController;
 use App\Http\Controllers\TambahSantriController;
@@ -107,6 +109,18 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         //Edit
         Route::get('edit-santri', 'edit')->name('edit-santri');
         Route::post('edit-santri', 'update')->name('edit-santri.update');
+    });
+
+    // Route Print Pembayaran
+    Route::controller(PrintPembayaranController::class)->group(function () {
+        Route::get('print-pembayaran', 'index')->name('print-pembayaran');
+        Route::get('print-pembayaran/print', 'print')->name('print-pembayaran.print');
+    });
+
+    // Route Print Pendidikan
+    Route::controller(PrintPendidikanController::class)->group(function () {
+        Route::get('print-pendidikan', 'index')->name('print-pendidikan');
+        Route::get('print-pendidikan/print', 'print')->name('print-pendidikan.print');
     });
 });
 
