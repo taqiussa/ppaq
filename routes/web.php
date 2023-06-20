@@ -114,7 +114,7 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
     // Route Print Pembayaran
     Route::controller(PrintPembayaranController::class)->group(function () {
         Route::get('print-pembayaran', 'index')->name('print-pembayaran');
-        Route::get('print-pembayaran/print', 'print')->name('print-pembayaran.print');
+        Route::get('print-pembayaran/print-semua', 'print_semua')->name('print-pembayaran.print-semua');
     });
 
     // Route Print Pendidikan

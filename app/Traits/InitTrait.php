@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\User;
+use App\Models\WajibBayar;
 
 trait InitTrait
 {
@@ -46,6 +47,24 @@ trait InitTrait
             ->get();
     }
 
+    public function data_all_santri_with_pembayaran()
+    {
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+            ->whereAktif(true)
+            ->with([
+                'pembayaran' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function data_bulan_hijriyah()
+    {
+        return now()->toHijri()->format('m');
+    }
+
     public function data_tahun_hijriyah()
     {
         $tahunIni = now()->toHijri()->format('Y');
@@ -58,8 +77,13 @@ trait InitTrait
         return $tahunAjaran;
     }
 
-    public function data_bulan_hijriyah()
+    public function data_wajib_bayar()
     {
-        return now()->toHijri()->format('m');
+        return WajibBayar::whereTahun(request('tahun'))
+            ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+            ->with([
+                'kategoriPembayaran'
+            ])
+            ->get();
     }
 }

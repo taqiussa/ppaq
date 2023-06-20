@@ -7,6 +7,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -67,5 +68,25 @@ class User extends Authenticatable
     public function biodata(): HasOne
     {
         return $this->hasOne(Biodata::class, 'nis', 'nis');
+    }
+
+    /**
+     * Get the pembayaran associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function pembayaran(): HasOne
+    {
+        return $this->hasOne(Pembayaran::class, 'nis', 'nis');
+    }
+
+    /**
+     * Get all of the pembayarans for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pembayarans(): HasMany
+    {
+        return $this->hasMany(Pembayaran::class, 'nis', 'nis');
     }
 }
