@@ -41,13 +41,33 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the absensi associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function absensi(): HasOne
+    {
+        return $this->hasOne(Absensi::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
+     * Get all of the absensis for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function absensis(): HasMany
+    {
+        return $this->hasMany(Absensi::class, 'nis', 'nis');
+    }
+
+    /**
      * Get the alamat associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function alamat(): HasOne
     {
-        return $this->hasOne(Alamat::class, 'nis', 'nis');
+        return $this->hasOne(Alamat::class, 'nis', 'nis')->withDefault();
     }
 
     /**
@@ -57,7 +77,7 @@ class User extends Authenticatable
      */
     public function alumni(): HasOne
     {
-        return $this->hasOne(Alumni::class, 'nis', 'nis');
+        return $this->hasOne(Alumni::class, 'nis', 'nis')->withDefault();
     }
 
     /**
@@ -67,7 +87,7 @@ class User extends Authenticatable
      */
     public function biodata(): HasOne
     {
-        return $this->hasOne(Biodata::class, 'nis', 'nis');
+        return $this->hasOne(Biodata::class, 'nis', 'nis')->withDefault();
     }
 
     /**
@@ -77,7 +97,7 @@ class User extends Authenticatable
      */
     public function pembayaran(): HasOne
     {
-        return $this->hasOne(Pembayaran::class, 'nis', 'nis');
+        return $this->hasOne(Pembayaran::class, 'nis', 'nis')->withDefault();
     }
 
     /**

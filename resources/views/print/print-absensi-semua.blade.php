@@ -1,8 +1,8 @@
 @extends('print')
 @section('content')
-<div class="px-7 py-7 font-bold text-lg capitalize ">
-    rekap pembayaran  {{ $kategori }} tahun {{ $tahun }}
-</div>
+    <div class="px-7 py-7 font-bold text-lg capitalize ">
+        rekap absensi bulan  {{ $bulan }} tahun {{ $tahun }}
+    </div>
     <div class="overflow-x-auto pt-2 px-7">
         <table class="w-full text-sm ">
             <thead class="text-sm  bg-gray-50">
@@ -14,16 +14,16 @@
                         Nama
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Wajib Bayar
+                        Hadir
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Jumlah Bayar
+                        Izin
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Kurang Bayar
+                        Alpha
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Keterangan
+                        Total
                     </th>
                 </tr>
             </thead>
@@ -37,20 +37,16 @@
                             {{ $santri->name }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            {{ rupiah($wajibBayar) }}
+                            {{ $santri->absensi->hadir }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            {{ rupiah($santri->pembayarans->sum('jumlah')) }}
+                            {{ $santri->absensi->izin }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            {{ rupiah($wajibBayar - $santri->pembayarans->sum('jumlah')) }}
+                            {{ $santri->absensi->alpha }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            @if ($wajibBayar - $santri->pembayarans->sum('jumlah') <= 0)
-                                Lunas
-                            @else
-                                Belum Lunas
-                            @endif
+                            {{ $santri->absensi->hadir + $santri->absensi->izin + $santri->absensi->alpha }}
                         </td>
                     </tr>
                 @endforeach

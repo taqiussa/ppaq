@@ -25,7 +25,9 @@ class PrintPembayaranController extends Controller
     {
         $data =
             [
+                'kategori' => KategoriPembayaran::find(request('kategoriPembayaranId'))?->nama,
                 'listSantri' => $this->data_all_santri_with_pembayaran(),
+                'tahun' => request('tahun'),
                 'wajibBayar' => $this->data_wajib_bayar()->first()->jumlah
             ];
 

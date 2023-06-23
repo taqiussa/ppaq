@@ -47,6 +47,19 @@ trait InitTrait
             ->get();
     }
 
+    public function data_all_santri_with_absensi()
+    {
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+            ->whereAktif(true)
+            ->with([
+                'absensi' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereBulan(request('bulan'))
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function data_all_santri_with_pembayaran()
     {
         return User::whereNotNull('nis')

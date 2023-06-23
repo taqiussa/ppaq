@@ -65,6 +65,38 @@ function namaBulan($bulan)
     return Carbon::parse(date('Y-' . $bulan . '-d'))->translatedFormat('F');
 }
 
+function namaBulanHijriyah($bulan)
+{
+    switch ($bulan) {
+        case '01':
+            return 'Muharram';
+        case '02':
+            return 'Shafar';
+        case '03':
+            return 'Rabiul Awwal';
+        case '04':
+            return 'Rabiul Akhir';
+        case '05':
+            return 'Jumadil Awwal';
+        case '06':
+            return 'Jumadil Akhir';
+        case '07':
+            return 'Rajab';
+        case '08':
+            return "Sya'ban";
+        case '09':
+            return 'Ramadhan';
+        case '10':
+            return 'Syawwal';
+        case '11':
+            return "Dzulqo'dah";
+        case '12':
+            return 'Dzulhijjah';
+        default:
+            return '';
+    }
+}
+
 function arrayBulan()
 {
     return json_decode(json_encode([
