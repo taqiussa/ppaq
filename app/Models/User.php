@@ -81,6 +81,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the bilhifzhi associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function bilhifzhi(): HasOne
+    {
+        return $this->hasOne(Bilhifzhi::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
+     * Get the binnadzor associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function binnadzor(): HasOne
+    {
+        return $this->hasOne(Binnadzor::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
      * Get the biodata associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -88,6 +108,16 @@ class User extends Authenticatable
     public function biodata(): HasOne
     {
         return $this->hasOne(Biodata::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
+     * Get the halaqoh associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function halaqoh(): HasOne
+    {
+        return $this->hasOne(Halaqoh::class, 'nis', 'nis')->withDefault();
     }
 
     /**

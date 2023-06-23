@@ -73,6 +73,20 @@ trait InitTrait
             ->get();
     }
 
+    public function data_all_santri_with_pendidikan()
+    {
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+            ->whereAktif(true)
+            ->with([
+                'bilhifzhi' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereBulan(request('bulan'))
+                    ->whereKategoriId(1)
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function data_bulan_hijriyah()
     {
         return now()->toHijri()->format('m');

@@ -18,4 +18,15 @@ class PrintPendidikanController extends Controller
             ]
         );
     }
+
+    public function print_semua()
+    {
+        $data = [
+            'bulan' => namaBulanHijriyah(request('bulan')),
+            'tahun' => request('tahun'),
+            'listSantri' => $this->data_all_santri_with_pendidikan()
+        ];
+
+        return view('print.print-pendidikan-semua', $data);
+    }
 }

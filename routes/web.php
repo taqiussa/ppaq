@@ -131,7 +131,7 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
     // Route Print Pendidikan
     Route::controller(PrintPendidikanController::class)->group(function () {
         Route::get('print-pendidikan', 'index')->name('print-pendidikan');
-        Route::get('print-pendidikan/print', 'print')->name('print-pendidikan.print');
+        Route::get('print-pendidikan/print-semua', 'print_semua')->name('print-pendidikan.print-semua');
     });
 });
 

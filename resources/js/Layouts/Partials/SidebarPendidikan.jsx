@@ -14,6 +14,7 @@ const SidebarPendidikan = ({ closeSide }) => {
                 <SidebarLink closeSide={closeSide} href={route('input-halaqoh')} active={route().current('input-halaqoh')} label='input halaqoh' />
                 <SidebarLink closeSide={closeSide} href={route('input-tes-semester')} active={route().current('input-tes-semester')} label='input tes semester' />
                 <SidebarLink closeSide={closeSide} href={route('print-absensi')} active={route().current('print-absensi')} label='print absensi' />
+                <SidebarLink closeSide={closeSide} href={route('print-pendidikan')} active={route().current('print-pendidikan')} label='print pendidikan' />
             </div>
         </div>
     )
