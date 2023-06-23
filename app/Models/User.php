@@ -81,23 +81,23 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the bilhifzhi associated with the User
+     * Get all of the bilhifzhi for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bilhifzhi(): HasOne
+    public function bilhifzhi(): HasMany
     {
-        return $this->hasOne(Bilhifzhi::class, 'nis', 'nis')->withDefault();
+        return $this->hasMany(Bilhifzhi::class, 'nis', 'nis');
     }
 
     /**
-     * Get the binnadzor associated with the User
+     * Get all of the binnadzor for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function binnadzor(): HasOne
+    public function binnadzor(): HasMany
     {
-        return $this->hasOne(Binnadzor::class, 'nis', 'nis')->withDefault();
+        return $this->hasMany(Binnadzor::class, 'nis', 'nis');
     }
 
     /**
@@ -111,13 +111,13 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the halaqoh associated with the User
+     * Get all of the halaqoh for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function halaqoh(): HasOne
+    public function halaqoh(): HasMany
     {
-        return $this->hasOne(Halaqoh::class, 'nis', 'nis')->withDefault();
+        return $this->hasMany(Halaqoh::class, 'nis', 'nis');
     }
 
     /**

@@ -80,8 +80,11 @@ trait InitTrait
             ->whereAktif(true)
             ->with([
                 'bilhifzhi' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan'))
-                    ->whereKategoriId(1)
+                    ->whereBulan(request('bulan')),
+                'binnadzor' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereBulan(request('bulan')),
+                'halaqoh' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereBulan(request('bulan')),
             ])
             ->orderBy('name')
             ->get();
