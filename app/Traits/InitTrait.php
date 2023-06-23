@@ -92,6 +92,18 @@ trait InitTrait
             ->get();
     }
 
+    public function data_all_santri_with_tes_semester()
+    {
+        return User::whereNotNull('nis')
+            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+            ->whereAktif(true)
+            ->with([
+                'tes'
+            ])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function data_bulan_hijriyah()
     {
         return now()->toHijri()->format('m');

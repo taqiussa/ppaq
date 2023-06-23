@@ -12,6 +12,7 @@ use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\PrintAbsensiController;
 use App\Http\Controllers\PrintPembayaranController;
 use App\Http\Controllers\PrintPendidikanController;
+use App\Http\Controllers\PrintTesSemesterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahAlumniController;
 use App\Http\Controllers\TambahSantriController;
@@ -139,6 +140,12 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
     Route::controller(PrintPendidikanController::class)->group(function () {
         Route::get('print-pendidikan', 'index')->name('print-pendidikan');
         Route::get('print-pendidikan/print-semua', 'print_semua')->name('print-pendidikan.print-semua');
+    });
+
+    // Route Print Tes Semester
+    Route::controller(PrintTesSemesterController::class)->group(function () {
+        Route::get('print-tes-semester', 'index')->name('print-tes-semester');
+        Route::get('print-tes-semester/print', 'print')->name('print-tes-semester.print');
     });
 });
 
