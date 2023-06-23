@@ -33,7 +33,7 @@ class TambahSantriController extends Controller
                 $image->move(storage_path('app/public/foto'), $imageName);
             }
 
-            User::create([
+            $user =  User::create([
                 'name' => request('nama'),
                 'username' => null,
                 'nis' => request('nis'),
@@ -41,6 +41,8 @@ class TambahSantriController extends Controller
                 'jenis_kelamin' => auth()->user()->jenis_kelamin,
                 'foto' => $imageName ?? null,
             ]);
+
+            $user->assignRole('Santri');
 
             Alamat::create([
                 'nis' => request('nis'),
@@ -108,10 +110,10 @@ class TambahSantriController extends Controller
             $user = User::whereNis(request('nis'))->first();
 
             $imageName ?
-            Storage::delete('public/foto/' . $user->foto)
-            :
-            null;
-            
+                Storage::delete('public/foto/' . $user->foto)
+                :
+                null;
+
             User::updateOrCreate([
                 'nis' => request('nis'),
             ], [
