@@ -37,7 +37,7 @@ class TambahAlumniController extends Controller
                 $image->move(storage_path('app/public/foto'), $imageName);
             }
 
-            User::create([
+            $user = User::create([
                 'name' => request('nama'),
                 'username' => null,
                 'nis' => request('nis'),
@@ -46,6 +46,8 @@ class TambahAlumniController extends Controller
                 'foto' => $imageName ?? null,
                 'aktif' => 0
             ]);
+
+            $user->assignRole('Santri');
 
             Alumni::create([
                 'nis' => request('nis'),
