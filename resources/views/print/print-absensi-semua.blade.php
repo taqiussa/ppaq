@@ -1,4 +1,4 @@
-@extends('print')
+@extends('print', ['title' => 'Print Absensi'])
 @section('content')
     <div class="px-7 py-7 font-bold text-lg capitalize ">
         rekap absensi bulan  {{ $bulan }} tahun {{ $tahun }}

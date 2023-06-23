@@ -139,4 +139,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pembayaran::class, 'nis', 'nis');
     }
+
+    /**
+     * Get all of the tashih for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tashih(): HasMany
+    {
+        return $this->hasMany(TashihPengasuh::class, 'nis', 'nis');
+    }
 }

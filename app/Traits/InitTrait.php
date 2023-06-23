@@ -85,6 +85,8 @@ trait InitTrait
                     ->whereBulan(request('bulan')),
                 'halaqoh' => fn ($q) => $q->whereTahun(request('tahun'))
                     ->whereBulan(request('bulan')),
+                'tashih' => fn ($q) => $q->whereTahun(request('tahun'))
+                    ->whereBulan(request('bulan')),
             ])
             ->orderBy('name')
             ->get();

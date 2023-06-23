@@ -1,4 +1,4 @@
-@extends('print')
+@extends('print', ['title' => 'Print Pembayaran'])
 @section('content')
 <div class="px-7 py-7 font-bold text-lg capitalize ">
     rekap pembayaran  {{ $kategori }} tahun {{ $tahun }}

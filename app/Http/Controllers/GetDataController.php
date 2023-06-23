@@ -6,6 +6,7 @@ use App\Models\Absensi;
 use App\Models\Bilhifzhi;
 use App\Models\Binnadzor;
 use App\Models\Halaqoh;
+use App\Models\TashihPengasuh;
 use App\Models\TesSemester;
 
 class GetDataController extends Controller
@@ -44,6 +45,14 @@ class GetDataController extends Controller
             'listHalaqoh' => Halaqoh::whereNis(request('nis'))
                 ->whereKategoriId(request('kategoriId'))
                 ->latest()
+                ->get()
+        ]);
+    }
+
+    public function get_tashih_pengasuh()
+    {
+        return response()->json([
+            'listTashih' => TashihPengasuh::whereNis(request('nis'))
                 ->get()
         ]);
     }

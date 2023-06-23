@@ -1,7 +1,7 @@
-@extends('print', ['title' => 'Print Pendidikan'])
+@extends('print', ['title' => 'Print Tes Semester'])
 @section('content')
     <div class="px-7 py-7 font-bold text-lg capitalize ">
-        rekap pendidikan bulan {{ $bulan }} tahun {{ $tahun }}
+        rekap tes semester semua santri aktif
     </div>
     <div class="overflow-x-auto pt-2 px-7">
         <table class="w-full text-sm ">

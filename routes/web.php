@@ -7,6 +7,7 @@ use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
 use App\Http\Controllers\InputHalaqohController;
+use App\Http\Controllers\InputTashihPengasuhController;
 use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\PrintAbsensiController;
 use App\Http\Controllers\PrintPembayaranController;
@@ -81,12 +82,18 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::delete('input-binnadzor', 'hapus')->name('input-binnadzor.hapus');
     });
 
-
     // Route Input Halaqoh
     Route::controller(InputHalaqohController::class)->group(function () {
         Route::get('input-halaqoh', 'index')->name('input-halaqoh');
         Route::post('input-halaqoh', 'simpan')->name('input-halaqoh.simpan');
         Route::delete('input-halaqoh', 'hapus')->name('input-halaqoh.hapus');
+    });
+
+    // Route Input Tashih Pengasuh
+    Route::controller(InputTashihPengasuhController::class)->group(function () {
+        Route::get('input-tashih-pengasuh', 'index')->name('input-tashih-pengasuh');
+        Route::post('input-tashih-pengasuh', 'simpan')->name('input-tashih-pengasuh.simpan');
+        Route::delete('input-tashih-pengasuh', 'hapus')->name('input-tashih-pengasuh.hapus');
     });
 
     // Route Input Tes Semester
