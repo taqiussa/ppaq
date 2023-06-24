@@ -87,8 +87,8 @@ const InputTesSemester = ({ initTahun, initBulan, listSantri }) => {
 
     return (
         <>
-            <Head title='Input Binnadzor' />
-            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input binnadzor</div>
+            <Head title='Input Tes Semester' />
+            <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">input tes semester</div>
             <form onSubmit={submit}>
 
                 <div className='lg:grid lg:grid-cols-5 lg:gap-2 lg:space-y-0 space-y-3 pb-2'>

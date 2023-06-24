@@ -1,7 +1,7 @@
 @extends('print', ['title' => 'Print Tes Semester'])
 @section('content')
     <div class="px-7 py-7 font-bold text-lg capitalize ">
-        rekap tes semester semua santri aktif
+        rekap tes semester semua santri aktif per tanggal {{ hariTanggal(date('Y-m-d')) }}
     </div>
     <div class="overflow-x-auto pt-2 px-7">
         <table class="w-full text-sm ">
@@ -14,17 +14,22 @@
                         Nama
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Bilhifzhi
+                        Semester 1
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Binnadzor
+                        Semester 2
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Halaqoh
+                        Semester 3
                     </th>
                     <th scope='col' class="py-3 px-2 text-left">
-                        Tashih Pengasuh
+                        Semester 4
                     </th>
+                    <th scope='col' class="py-3 px-2 text-left">
+                        Semester 5
+                    </th>
+                    <th scope='col' class="py-3 px-2 text-left">
+                        Semester 6
                     </th>
                 </tr>
             </thead>
@@ -38,36 +43,22 @@
                             {{ $user->name }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            Ziyadah :
-                            @foreach ($user->bilhifzhi->where('kategori_id', 1) as $item)
-                                {{ $item->juz }},
-                            @endforeach
-                            <br>
-                            Muroja'ah :
-                            @foreach ($user->bilhifzhi->where('kategori_id', 2) as $item)
-                                {{ $item->juz }},
-                            @endforeach
+                            {{ $user->tesSemester->where('semester', 1)->first()?->juz }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            @foreach ($user->binnadzor as $item)
-                                {{ $item->juz }},
-                            @endforeach
+                            {{ $user->tesSemester->where('semester', 2)->first()?->juz }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            Kelas MTQ :
-                            @foreach ($user->halaqoh->where('kategori_id', 1) as $item)
-                                {{ $item->juz }},
-                            @endforeach
-                            <br>
-                            Tashih MTQ :
-                            @foreach ($user->halaqoh->where('kategori_id', 2) as $item)
-                                {{ $item->juz }},
-                            @endforeach
+                            {{ $user->tesSemester->where('semester', 3)->first()?->juz }}
                         </td>
                         <td class="py-2 px-2 font-medium ">
-                            @foreach ($user->tashih as $item)
-                                {{ $item->juz }},
-                            @endforeach
+                            {{ $user->tesSemester->where('semester', 4)->first()?->juz }}
+                        </td>
+                        <td class="py-2 px-2 font-medium ">
+                            {{ $user->tesSemester->where('semester', 5)->first()?->juz }}
+                        </td>
+                        <td class="py-2 px-2 font-medium ">
+                            {{ $user->tesSemester->where('semester', 6)->first()?->juz }}
                         </td>
                     </tr>
                 @endforeach

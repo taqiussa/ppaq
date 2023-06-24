@@ -15,6 +15,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('get-binnadzor', 'get_binnadzor')->name('get-binnadzor');
         Route::post('get-halaqoh', 'get_halaqoh')->name('get-halaqoh');
         Route::post('get-tashih-pengasuh', 'get_tashih_pengasuh')->name('get-tashih-pengasuh');
+        Route::post('get-tes-semester', 'get_tes_semester')->name('get-tes-semester');
         Route::post('get-data-induk-santri', 'get_data_induk_santri')->name('get-data-induk-santri');
     });
 

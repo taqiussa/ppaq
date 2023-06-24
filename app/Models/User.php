@@ -149,4 +149,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(TashihPengasuh::class, 'nis', 'nis');
     }
+
+    /**
+     * Get all of the tesSemeste for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tesSemester(): HasMany
+    {
+        return $this->hasMany(TesSemester::class, 'nis', 'nis');
+    }
 }

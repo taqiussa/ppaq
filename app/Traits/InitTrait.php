@@ -98,7 +98,7 @@ trait InitTrait
             ->whereJenisKelamin(auth()->user()->jenis_kelamin)
             ->whereAktif(true)
             ->with([
-                'tes'
+                'tesSemester'
             ])
             ->orderBy('name')
             ->get();

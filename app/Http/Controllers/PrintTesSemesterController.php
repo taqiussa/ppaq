@@ -16,8 +16,10 @@ class PrintTesSemesterController extends Controller
     public function print()
     {
         $data  =
-        [
-            'listSantri' => 
-        ]
+            [
+                'listSantri' => $this->data_all_santri_with_tes_semester()
+            ];
+
+        return view('print.print-tes-semester-semua', $data);
     }
 }

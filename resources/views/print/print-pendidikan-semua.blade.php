@@ -25,7 +25,6 @@
                     <th scope='col' class="py-3 px-2 text-left">
                         Tashih Pengasuh
                     </th>
-                    </th>
                 </tr>
             </thead>
             <tbody>
