@@ -6,7 +6,9 @@ use App\Http\Controllers\DataIndukSantriController;
 use App\Http\Controllers\InputAbsensiController;
 use App\Http\Controllers\InputBilhifzhiController;
 use App\Http\Controllers\InputBinnadzorController;
+use App\Http\Controllers\InputDataSkorController;
 use App\Http\Controllers\InputHalaqohController;
+use App\Http\Controllers\InputPelanggaranController;
 use App\Http\Controllers\InputTashihPengasuhController;
 use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\PrintAbsensiController;
@@ -88,6 +90,20 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidi
         Route::get('input-halaqoh', 'index')->name('input-halaqoh');
         Route::post('input-halaqoh', 'simpan')->name('input-halaqoh.simpan');
         Route::delete('input-halaqoh', 'hapus')->name('input-halaqoh.hapus');
+    });
+
+    // Route Input Pelanggaran
+    Route::controller(InputPelanggaranController::class)->group(function () {
+        Route::get('input-pelanggaran', 'index')->name('input-pelanggaran');
+        Route::post('input-pelanggaran', 'simpan')->name('input-pelanggaran.simpan');
+        Route::delete('input-pelanggaran', 'hapus')->name('input-pelanggaran.hapus');
+    });
+
+    // Route Input Peraturan (Data Skor)
+    Route::controller(InputDataSkorController::class)->group(function () {
+        Route::get('input-data-skor', 'index')->name('input-data-skor');
+        Route::post('input-data-skor', 'simpan')->name('input-data-skor.simpan');
+        Route::delete('input-data-skor', 'hapus')->name('input-data-skor.hapus');
     });
 
     // Route Input Tashih Pengasuh
