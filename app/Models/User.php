@@ -141,6 +141,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all of the skors for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function skors(): HasMany
+    {
+        return $this->hasMany(PenilaianSkor::class, 'nis', 'nis');
+    }
+
+    /**
      * Get all of the tashih for the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

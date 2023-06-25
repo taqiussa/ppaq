@@ -30,5 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(GetDataSantriController::class)->group(function () {
         Route::post('get-administrasi', 'get_administrasi')->name('get-administrasi');
         Route::post('get-kehadiran', 'get_kehadiran')->name('get-kehadiran');
+        Route::post('get-skor', 'get_skor')->name('get-skor');
     });
 });

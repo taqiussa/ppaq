@@ -10,6 +10,7 @@ const SidebarKeamanan = ({ closeSide }) => {
             <div>
                 <SidebarLink closeSide={closeSide} href={route('input-data-skor')} active={route().current('input-data-skor')} label='input peraturan' />
                 <SidebarLink closeSide={closeSide} href={route('input-pelanggaran')} active={route().current('input-pelanggaran')} label='input pelanggaran' />
+                <SidebarLink closeSide={closeSide} href={route('saldo-skor')} active={route().current('saldo-skor')} label='saldo skor' />
             </div>
         </div>
     )

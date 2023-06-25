@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Absensi;
 use App\Models\Pembayaran;
 use App\Models\WajibBayar;
+use App\Traits\InitTrait;
 
 class GetDataSantriController extends Controller
 {
+    use InitTrait;
+
     public function get_administrasi()
     {
         return response()->json([
@@ -30,6 +33,13 @@ class GetDataSantriController extends Controller
             'listAbsensi' => Absensi::whereTahun(request('tahun'))
                 ->whereNis(auth()->user()->nis)
                 ->get()
+        ]);
+    }
+
+    public function get_skor()
+    {
+        return response()->json([
+            'listSantri' => $this->data_all_santri_with_skor()
         ]);
     }
 }

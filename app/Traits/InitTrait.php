@@ -167,6 +167,31 @@ trait InitTrait
         return $user;
     }
 
+    public function data_all_santri_with_skor()
+    {
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'skors' => fn ($q) => $q->whereTahun(request('tahun'))
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'skors' => fn ($q) => $q->whereTahun(request('tahun'))
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+
+        return $user;
+    }
+
     public function data_all_santri_with_tes_semester()
     {
         if (auth()->user()->hasRole('Pengasuh')) {
