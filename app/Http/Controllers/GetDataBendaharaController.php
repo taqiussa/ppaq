@@ -9,14 +9,28 @@ class GetDataBendaharaController extends Controller
 {
     public function get_all_pembayaran()
     {
-        return response()->json([
-            'listPembayaran' => Pembayaran::whereTahun(request('tahun'))
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $listPembayaran = Pembayaran::whereTahun(request('tahun'))
+                ->with([
+                    'user' => fn ($q) => $q->select('nis', 'name', 'jenis_kelamin'),
+                    'kategoriPembayaran' => fn ($q) => $q->select('id', 'nama'),
+                ])
+                ->latest()
+                ->get()
+                ->sortBy('user.jenis_kelamin')
+                ->values();
+        } else {
+            $listPembayaran = Pembayaran::whereTahun(request('tahun'))
+                ->whereHas('user', fn ($q) => $q->whereJenisKelamin(auth()->user()->jenis_kelamin))
                 ->with([
                     'user' => fn ($q) => $q->select('nis', 'name'),
                     'kategoriPembayaran' => fn ($q) => $q->select('id', 'nama'),
                 ])
                 ->latest()
-                ->get()
+                ->get();
+        }
+        return response()->json([
+            'listPembayaran' => $listPembayaran
         ]);
     }
 

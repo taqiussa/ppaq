@@ -22,86 +22,174 @@ trait InitTrait
 
     public function data_alumni()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(false)
-            ->with([
-                'alamat',
-                'alumni',
-                'biodata',
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+
+            $user = User::whereNotNull('nis')
+                ->whereAktif(false)
+                ->with([
+                    'alamat',
+                    'alumni',
+                    'biodata',
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(false)
+                ->with([
+                    'alamat',
+                    'alumni',
+                    'biodata',
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+        return $user;
     }
 
     public function data_all_santri()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(true)
-            ->with([
-                'biodata',
-                'alamat'
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user =  User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'biodata',
+                    'alamat'
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user =  User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'biodata',
+                    'alamat'
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+
+        return $user;
     }
 
     public function data_all_santri_with_absensi()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(true)
-            ->with([
-                'absensi' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan'))
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'absensi' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan'))
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'absensi' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan'))
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+        return $user;
     }
 
     public function data_all_santri_with_pembayaran()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(true)
-            ->with([
-                'pembayaran' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'pembayaran' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'pembayaran' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+        return $user;
     }
 
     public function data_all_santri_with_pendidikan()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(true)
-            ->with([
-                'bilhifzhi' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan')),
-                'binnadzor' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan')),
-                'halaqoh' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan')),
-                'tashih' => fn ($q) => $q->whereTahun(request('tahun'))
-                    ->whereBulan(request('bulan')),
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'bilhifzhi' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'binnadzor' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'halaqoh' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'tashih' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'bilhifzhi' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'binnadzor' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'halaqoh' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                    'tashih' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereBulan(request('bulan')),
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+        return $user;
     }
 
     public function data_all_santri_with_tes_semester()
     {
-        return User::whereNotNull('nis')
-            ->whereJenisKelamin(auth()->user()->jenis_kelamin)
-            ->whereAktif(true)
-            ->with([
-                'tesSemester'
-            ])
-            ->orderBy('name')
-            ->get();
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'tesSemester'
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'tesSemester'
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+
+        return $user;
     }
 
     public function data_bulan_hijriyah()
