@@ -9,6 +9,7 @@ import SidebarSantri from './Partials/SidebarSantri';
 import SidebarPendidikan from './Partials/SidebarPendidikan';
 import SidebarSekretaris from './Partials/SidebarSekretaris';
 import SidebarPengasuh from './Partials/SidebarPengasuh';
+import SidebarKeamanan from './Partials/SidebarKeamanan';
 export default function Sidebar({ open, closeSide, auth }) {
     return (
         <div>
@@ -39,6 +40,10 @@ export default function Sidebar({ open, closeSide, auth }) {
 
                             {auth.roles.includes('Bendahara') &&
                                 <SidebarBendahara closeSide={closeSide} />
+                            }
+
+                            {auth.roles.includes('Keamanan') &&
+                                <SidebarKeamanan closeSide={closeSide} />
                             }
 
                             {auth.roles.includes('Ketua') &&
