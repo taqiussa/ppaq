@@ -7,7 +7,7 @@ use App\Http\Controllers\RekapPembayaranController;
 use App\Http\Controllers\AturKategoriPembayaranController;
 
 // Role Bendahara
-Route::middleware(['auth', 'role:Bendahara'])->group(function () {
+Route::middleware(['auth', 'role:Bendahara|Pengasuh'])->group(function () {
 
     // Route Atur Kategori Pembayaran
     Route::controller(AturKategoriPembayaranController::class)->group(function () {

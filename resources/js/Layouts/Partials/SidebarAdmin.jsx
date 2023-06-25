@@ -8,6 +8,7 @@ const SidebarAdmin = ({ closeSide }) => {
                 Admin
             </div>
             <div>
+                <SidebarLink closeSide={closeSide} href={route('tambah-pengguna')} active={route().current('tambah-pengguna')} label='tambah pengguna' />
                 <SidebarLink closeSide={closeSide} href={route('upload-santri')} active={route().current('upload-santri')} label='upload santri' />
             </div>
         </div>

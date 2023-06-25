@@ -44,7 +44,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Role Semua
-Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengurus|Keamanan|Pendidikan'])->group(function () {
+Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengasuh|Pengurus|Keamanan|Pendidikan'])->group(function () {
 
     // Route Atur Boyong
     Route::controller(AturBoyongController::class)->group(function () {
