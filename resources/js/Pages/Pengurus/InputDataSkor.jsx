@@ -55,8 +55,8 @@ const InputDataSkor = ({ listDataSkor }) => {
 
     return (
         <>
-            <Head title='Input Data Skor' />
-            <div className="bg-emerald-200 border-b-2 border-emerald-500 text-lg text-center text-slate-600 font-bold uppercase mb-2">input data skor</div>
+            <Head title='Input Peraturan' />
+            <div className="bg-emerald-200 border-b-2 border-emerald-500 text-lg text-center text-slate-600 font-bold uppercase mb-2">input peraturan</div>
             <form onSubmit={submit} className='space-y-3'>
                 <InputArea
                     name='keterangan'

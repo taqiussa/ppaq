@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PenilaianSkor;
 use App\Models\Skor;
 use App\Traits\InitTrait;
 
@@ -21,4 +22,29 @@ class InputPelanggaranController extends Controller
             ]
         );
     }
+
+    public function simpan()
+    {
+        request()->validate([
+            'nis' => 'required',
+            'tanggal' => 'required',
+            'skorId' => 'required',
+            'bulan' => 'required',
+            'tahun' => 'required',
+        ]);
+
+        $skor = Skor::find(request('skorId'));
+
+        PenilaianSkor::create([
+            'nis' => request('nis'),
+            'tanggal' => request('tanggal'),
+            'bulan' => request('bulan'),
+            'tahun' => request('tahun'),
+            'skor' => $skor->skor,
+            'skor_id' => request('skorId'),
+        ]);
+
+        return to_route('input-pelanggaran');
+    }
+
 }

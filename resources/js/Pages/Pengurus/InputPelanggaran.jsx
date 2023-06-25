@@ -1,29 +1,22 @@
 import PrimaryButton from '@/Components/PrimaryButton'
-import Hapus from '@/Components/Sia/Hapus'
-import InputText from '@/Components/Sia/InputText'
-import Kategori from '@/Components/Sia/Kategori'
+import Bulan from '@/Components/Sia/Bulan'
 import SearchableSelect from '@/Components/Sia/SearchableSelect'
-import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
-import { hariTanggal, maskRupiah, rupiah } from '@/Functions/functions'
-import getPembayaran from '@/Functions/getPembayaran'
-import getWajibBayar from '@/Functions/getWajibBayar'
+import Tanggal from '@/Components/Sia/Tanggal'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm } from '@inertiajs/react'
+import moment from 'moment'
 import React from 'react'
-import { useEffect } from 'react'
-import { trackPromise } from 'react-promise-tracker'
 import { toast } from 'react-toastify'
 
-const InputPelanggaran = ({ initTahun, listSantri }) => {
+const InputPelanggaran = ({ initTahun, initBulan, listSantri, listPeraturan }) => {
 
     const { data, setData, post, errors, processing, delete: destroy } = useForm({
         tahun: initTahun,
-        kategoriPembayaranId: '',
+        bulan: initBulan,
+        tanggal: moment(new Date()).format('YYYY-MM-DD'),
         nis: '',
-        jumlah: '',
-        listPembayaran: [],
-        listKategori: []
+        skorId: '',
     })
 
     const options = listSantri.map((santri) => ({
@@ -31,19 +24,10 @@ const InputPelanggaran = ({ initTahun, listSantri }) => {
         label: santri.name
     }))
 
-    async function getDataPembayaran() {
-        const response = await getPembayaran(data.tahun, data.nis)
-        setData({ ...data, listPembayaran: response.listPembayaran ?? [] })
-    }
-
-    async function getDataWajiBayar() {
-        const response = await getWajibBayar(data.tahun)
-        setData({ ...data, listKategori: response.listWajibBayar })
-    }
-
-    const handleRupiah = (e) => {
-        setData('jumlah', maskRupiah(e.target.value))
-    }
+    const optionPeraturan = listPeraturan.map((aturan) => ({
+        value: aturan.id,
+        label: `(${aturan.skor}) ${aturan.keterangan}`
+    }))
 
     const onHandleChange = (e) => {
         setData(e.target.name, e.target.value)
@@ -52,57 +36,46 @@ const InputPelanggaran = ({ initTahun, listSantri }) => {
     const submit = (e) => {
         e.preventDefault()
 
-        post(route('input-pembayaran.simpan'),
+        post(route('input-pelanggaran.simpan'),
             {
                 onSuccess: () => {
-                    toast.success('Berhasil Simpan Pembayaran')
+                    toast.success('Berhasil Simpan Pelanggaran')
                     setData({ ...data })
-                    trackPromise(getDataPembayaran())
                 }
             })
     }
 
-    const handleDelete = (id) => {
-        Sweet
-            .fire({
-                title: 'Hapus',
-                text: 'Anda Yakin Menghapus?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            })
-            .then((result) => {
-                if (result.isConfirmed)
-                    destroy(route('input-pembayaran.hapus', { id: id }),
-                        {
-                            onSuccess: () => {
-                                toast.success('Berhasil Hapus Data Pembayaran')
-                                setData({ ...data })
-                                trackPromise(getDataPembayaran())
-                            }
-                        })
-            })
-    }
-
-    useEffect(() => {
-        if (data.tahun)
-            trackPromise(getDataWajiBayar())
-    }, [data.tahun])
-
-    useEffect(() => {
-        if (data.tahun && data.nis)
-            trackPromise(getDataPembayaran())
-    }, [data.tahun, data.nis])
-
     return (
         <>
-            <Head title='Input Pembayaran' />
+            <Head title='Input Pelanggaran' />
             <div className="font-bold text-lg text-center text-slate-600 uppercase border-b-2 border-emerald-500 mb-3 bg-emerald-200">
-                input pembayaran
+                input pelanggaran
             </div>
             <form onSubmit={submit}>
                 <div className='lg:grid lg:grid-cols-5 lg:gap-2 lg:space-y-0 grid grid-cols-2 gap-2 pb-2'>
+
+                    <Tahun
+                        id='tahun'
+                        name='tahun'
+                        value={data.tahun}
+                        message={errors.tahun}
+                        handleChange={onHandleChange}
+                    />
+
+                    <Bulan
+                        name='bulan'
+                        value={data.bulan}
+                        message={errors.bulan}
+                        handleChange={onHandleChange}
+                    />
+
+                    <Tanggal
+                        name='tanggal'
+                        label='tanggal'
+                        value={data.tanggal}
+                        message={errors.tanggal}
+                        handleChange={onHandleChange}
+                    />
 
                     <div className="col-span-2">
                         <SearchableSelect
@@ -116,36 +89,22 @@ const InputPelanggaran = ({ initTahun, listSantri }) => {
                         />
                     </div>
 
-                    <Tahun
-                        id='tahun'
-                        name='tahun'
-                        value={data.tahun}
-                        message={errors.tahun}
-                        handleChange={onHandleChange}
-                    />
-
-                    <Kategori
-                        id='kategoriPembayaranId'
-                        name='kategoriPembayaranId'
-                        value={data.kategoriPembayaranId}
-                        message={errors.kategoriPembayaranId}
-                        handleChange={onHandleChange}
-                        listKategori={data.listKategori}
-                    />
-
-                    <InputText
-                        id='jumlah'
-                        name='jumlah'
-                        label='Jumlah'
-                        value={data.jumlah}
-                        message={errors.jumlah}
-                        handleChange={handleRupiah}
-                    />
+                    <div className="col-span-5">
+                        <SearchableSelect
+                            id='skorId'
+                            name='skorId'
+                            label='Pilih Pelanggaran'
+                            value={data.skorId}
+                            message={errors.skorId}
+                            options={optionPeraturan}
+                            onChange={(e) => setData({ ...data, skorId: e ?? '' })}
+                        />
+                    </div>
 
                 </div>
                 <PrimaryButton onClick={submit} children='simpan' disabled={processing} />
             </form>
-            <div className="overflow-x-auto pt-2">
+            {/* <div className="overflow-x-auto pt-2">
                 <table className="w-full text-sm text-slate-600">
                     <thead className="text-sm text-slate-600 bg-gray-50">
                         <tr>
@@ -188,7 +147,7 @@ const InputPelanggaran = ({ initTahun, listSantri }) => {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
         </>
     )
 }
