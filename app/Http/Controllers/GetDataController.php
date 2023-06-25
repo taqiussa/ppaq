@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Halaqoh;
 use App\Models\Bilhifzhi;
 use App\Models\Binnadzor;
-use App\Models\Halaqoh;
-use App\Models\TashihPengasuh;
 use App\Models\TesSemester;
+use App\Models\PenilaianSkor;
+use App\Models\TashihPengasuh;
 
 class GetDataController extends Controller
 {
@@ -20,48 +21,22 @@ class GetDataController extends Controller
         ]);
     }
 
-    public function get_bilhifzhi()
+    public function get_pelanggaran()
     {
         return response()->json([
-            'listBilhifzhi' => Bilhifzhi::whereNis(request('nis'))
-                ->whereKategoriId(request('kategoriId'))
-                ->latest()
+            'listPelanggaran' => PenilaianSkor::whereTahun(request('tahun'))
+                ->with([
+                    'skors',
+                    'user'
+                ])
                 ->get()
         ]);
     }
 
-    public function get_binnadzor()
+    public function get_skor()
     {
         return response()->json([
-            'listBinnadzor' => Binnadzor::whereNis(request('nis'))
-                ->latest()
-                ->get()
-        ]);
-    }
-
-    public function get_halaqoh()
-    {
-        return response()->json([
-            'listHalaqoh' => Halaqoh::whereNis(request('nis'))
-                ->whereKategoriId(request('kategoriId'))
-                ->latest()
-                ->get()
-        ]);
-    }
-
-    public function get_tashih_pengasuh()
-    {
-        return response()->json([
-            'listTashih' => TashihPengasuh::whereNis(request('nis'))
-                ->get()
-        ]);
-    }
-
-    public function get_tes_semester()
-    {
-        return response()->json([
-            'listTes' => TesSemester::whereNis(request('nis'))
-                ->get()
+            'listSantri' => $this->data_all_santri_with_skor()
         ]);
     }
 }

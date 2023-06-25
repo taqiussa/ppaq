@@ -16,6 +16,7 @@ use App\Http\Controllers\PrintPembayaranController;
 use App\Http\Controllers\PrintPendidikanController;
 use App\Http\Controllers\PrintTesSemesterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RekapPelanggaranController;
 use App\Http\Controllers\SaldoSkorController;
 use App\Http\Controllers\TambahAlumniController;
 use App\Http\Controllers\TambahSantriController;
@@ -119,6 +120,12 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengasuh|Pengurus|Keamana
         Route::get('input-tes-semester', 'index')->name('input-tes-semester');
         Route::post('input-tes-semester', 'simpan')->name('input-tes-semester.simpan');
         Route::delete('input-tes-semester', 'hapus')->name('input-tes-semester.hapus');
+    });
+
+    // Route Rekap Pelanggaran
+    Route::controller(RekapPelanggaranController::class)->group(function () {
+        Route::get('rekap-pelanggaran', 'index')->name('rekap-pelanggaran');
+        Route::delete('rekap-pelanggaran', 'hapus')->name('rekap-pelanggaran.hapus');
     });
 
     // Route Saldo Skor

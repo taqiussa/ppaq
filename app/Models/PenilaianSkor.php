@@ -16,7 +16,7 @@ class PenilaianSkor extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function skor(): BelongsTo
+    public function skors(): BelongsTo
     {
         return $this->belongsTo(Skor::class)->withDefault();
     }
