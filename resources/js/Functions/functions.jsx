@@ -68,7 +68,7 @@ export function hariTanggal(tanggal) {
 
 export function kategoriBilhifzhi(kategori) {
     switch (kategori) {
-        case 1:
+        case '1':
             return 'Ziyadah';
         default:
             return "Muroja'ah";
@@ -77,7 +77,7 @@ export function kategoriBilhifzhi(kategori) {
 
 export function kategoriHalaqoh(kategori) {
     switch (kategori) {
-        case 1:
+        case '1':
             return 'Kelas MTQ';
         default:
             return 'Tashih MTQ';
