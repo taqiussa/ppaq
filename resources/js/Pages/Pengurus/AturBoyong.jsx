@@ -60,8 +60,8 @@ const AturBoyong = ({ initTahun, initBulan, listSantri }) => {
                     </div>
                     <Tanggal
                         id='tanggal'
-                        name='tanggal Boyong'
-                        label='tanggal'
+                        name='tanggal'
+                        label='tanggal Boyong'
                         value={data.tanggal}
                         message={errors.tanggal}
                         handleChange={onHandleChange}
