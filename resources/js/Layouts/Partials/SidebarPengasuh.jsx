@@ -13,10 +13,13 @@ const SidebarPengasuh = ({ closeSide }) => {
                 <SidebarLink closeSide={closeSide} href={route('tambah-alumni')} active={route().current('tambah-alumni')} label='tambah alumni' />
                 <SidebarLink closeSide={closeSide} href={route('tambah-santri')} active={route().current('tambah-santri')} label='tambah santri' />
                 <SidebarLink closeSide={closeSide} href={route('print-absensi')} active={route().current('print-absensi')} label='print absensi' />
+                <SidebarLink closeSide={closeSide} href={route('print-pelanggaran')} active={route().current('print-pelanggaran')} label='print pelanggaran' />
                 <SidebarLink closeSide={closeSide} href={route('print-pembayaran')} active={route().current('print-pembayaran')} label='print pembayaran' />
                 <SidebarLink closeSide={closeSide} href={route('print-pendidikan')} active={route().current('print-pendidikan')} label='print pendidikan' />
                 <SidebarLink closeSide={closeSide} href={route('print-tes-semester')} active={route().current('print-tes-semester')} label='print tes semester' />
+                <SidebarLink closeSide={closeSide} href={route('rekap-pelanggaran')} active={route().current('rekap-pelanggaran')} label='rekap pelanggaran' />
                 <SidebarLink closeSide={closeSide} href={route('rekap-pembayaran')} active={route().current('rekap-pembayaran')} label='rekap pembayaran' />
+                <SidebarLink closeSide={closeSide} href={route('saldo-skor')} active={route().current('saldo-skor')} label='saldo skor' />
             </div>
         </div>
     )

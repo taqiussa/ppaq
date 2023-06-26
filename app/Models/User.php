@@ -121,6 +121,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the pelanggaran associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function pelanggaran(): HasOne
+    {
+        return $this->hasOne(PenilaianSkor::class, 'nis', 'nis')->withDefault();
+    }
+
+    /**
+     * Get all of the pelanggarans for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pelanggarans(): HasMany
+    {
+        return $this->hasMany(PenilaianSkor::class, 'nis', 'nis');
+    }
+
+    /**
      * Get the pembayaran associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

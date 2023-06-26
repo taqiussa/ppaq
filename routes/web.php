@@ -12,6 +12,7 @@ use App\Http\Controllers\InputPelanggaranController;
 use App\Http\Controllers\InputTashihPengasuhController;
 use App\Http\Controllers\InputTesSemesterController;
 use App\Http\Controllers\PrintAbsensiController;
+use App\Http\Controllers\PrintPelanggaranController;
 use App\Http\Controllers\PrintPembayaranController;
 use App\Http\Controllers\PrintPendidikanController;
 use App\Http\Controllers\PrintTesSemesterController;
@@ -155,6 +156,12 @@ Route::middleware(['auth', 'role:Admin|Ketua|Bendahara|Pengasuh|Pengurus|Keamana
     Route::controller(PrintAbsensiController::class)->group(function () {
         Route::get('print-absensi', 'index')->name('print-absensi');
         Route::get('print-absensi/print-semua', 'print_semua')->name('print-absensi.print-semua');
+    });
+
+    // Route Print Pelanggaran
+    Route::controller(PrintPelanggaranController::class)->group(function () {
+        Route::get('print-pelanggaran', 'index')->name('print-pelanggaran');
+        Route::get('print-pelanggaran/print-semua', 'print_semua')->name('print-pelanggaran.print-semua');
     });
 
     // Route Print Pembayaran
