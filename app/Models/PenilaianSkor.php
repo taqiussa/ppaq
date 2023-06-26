@@ -18,7 +18,7 @@ class PenilaianSkor extends Model
      */
     public function skors(): BelongsTo
     {
-        return $this->belongsTo(Skor::class)->withDefault();
+        return $this->belongsTo(Skor::class, 'skor_id')->withDefault();
     }
 
     /**

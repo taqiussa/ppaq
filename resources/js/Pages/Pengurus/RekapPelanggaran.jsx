@@ -1,8 +1,12 @@
+import Hapus from '@/Components/Sia/Hapus'
+import InputText from '@/Components/Sia/InputText'
+import Sweet from '@/Components/Sia/Sweet'
 import Tahun from '@/Components/Sia/Tahun'
-import { penjumlahan } from '@/Functions/functions'
+import { hariTanggal, penjumlahan } from '@/Functions/functions'
+import getPelanggaran from '@/Functions/getPelanggaran'
 import getSkor from '@/Functions/getSkor'
 import AppLayout from '@/Layouts/AppLayout'
-import { Head } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -11,51 +15,86 @@ import { trackPromise } from 'react-promise-tracker'
 
 const RekapPelanggaran = ({ initTahun }) => {
 
-    const [tahun, setTahun] = useState(initTahun)
-    const [listSantri, setListSantri] = useState([])
-    const [search, setSearch] = useState('')
+    const { data, setData, delete: destroy } = useForm({
+        tahun: initTahun,
+        search: ''
+    })
+
+    const [listPelanggaran, setListPelanggaran] = useState([])
 
     const [page, setPage] = useState(0);
     const postsPerPage = 10;
     const numberOfPostsVisited = page * postsPerPage;
-    const totalPages = Math.ceil(listSantri?.length / postsPerPage);
+    const totalPages = Math.ceil(listPelanggaran?.length / postsPerPage);
     const changePage = ({ selected }) => {
         setPage(selected);
     };
 
-    const filteredData = listSantri?.filter((list) => {
-        const searchTerm = search.toLowerCase();
-        const user = list.name.toLowerCase();
+    const filteredData = listPelanggaran?.filter((list) => {
+        const searchTerm = data.search.toLowerCase();
+        const user = list.user?.name.toLowerCase();
         return (
             user.includes(searchTerm)
         );
     });
 
-    async function getListSantri() {
-        const res = await getSkor(tahun)
-        setListSantri(res.listSantri)
+    async function getListPelanggaran() {
+        const res = await getPelanggaran(data.tahun)
+        setListPelanggaran(res.listPelanggaran)
     }
 
     const onHandleChange = (e) => {
-        setTahun(e.target.value)
+        setData(e.target.name, e.target.value)
+    }
+
+    const handleDelete = (id) => {
+
+        Sweet
+            .fire({
+                title: 'Hapus Pelanggaran',
+                text: 'Anda Yakin Menghapus ?',
+                showCancelButton: true,
+                showConfirmButton: true,
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Ya, Hapus!'
+            })
+            .then(result => {
+                if (result.isConfirmed)
+                    destroy(route('rekap-pelanggaran.hapus', { id: id }), {
+                        onSuccess: () => {
+                            setData({ ...data })
+                            trackPromise(getListPelanggaran())
+                        }
+                    })
+            })
     }
 
     useEffect(() => {
-        if (tahun)
-            trackPromise(getListSantri())
-    }, [tahun])
+        if (data.tahun)
+            trackPromise(getListPelanggaran())
+    }, [data.tahun])
     return (
         <>
-            <Head title='Saldo Skor' />
+            <Head title='Rekap Pelanggaran' />
             <div className="bg-emerald-200 border-b-2 border-emerald-500 font-bold text-center text-lg text-slate-600 uppercase mb-2">
-                saldo skor
+                rekap pelanggaran
             </div>
-            <div className="lg:grid lg:grid-cols-5 py-2">
+            <div className="lg:grid lg:grid-cols-5 lg:gap-2 py-2">
                 <Tahun
                     name='tahun'
-                    value={tahun}
+                    value={data.tahun}
                     handleChange={onHandleChange}
                 />
+                <div className="col-span-2">
+
+                    <InputText
+                        id='search'
+                        name='search'
+                        value={data.search}
+                        label='search'
+                        handleChange={onHandleChange}
+                    />
+                </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-slate-600">
@@ -68,12 +107,21 @@ const RekapPelanggaran = ({ initTahun }) => {
                                 Nama
                             </th>
                             <th scope='col' className="py-3 px-2 text-center">
-                                Total Skor
+                                Tanggal
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-center">
+                                Keterangan
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-center">
+                                Skor
+                            </th>
+                            <th scope='col' className="py-3 px-2 text-center">
+                                Aksi
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {listSantri &&
+                        {listPelanggaran &&
                             filteredData
                                 .slice(numberOfPostsVisited, numberOfPostsVisited + postsPerPage)
                                 .map((list, index) => (
@@ -82,10 +130,19 @@ const RekapPelanggaran = ({ initTahun }) => {
                                             {index + 1 + (page * 10)}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600">
-                                            {list.name}
+                                            {list.user?.name}
                                         </td>
                                         <td className="py-2 px-2 font-medium text-slate-600 text-center">
-                                            {penjumlahan(list.skors, 'skor')}
+                                            {hariTanggal(list.tanggal)}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600 text-center">
+                                            {list.skors?.keterangan}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600 text-center">
+                                            {list.skors?.skor}
+                                        </td>
+                                        <td className="py-2 px-2 font-medium text-slate-600 text-center">
+                                            <Hapus onClick={() => handleDelete(list.id)} />
                                         </td>
                                     </tr>
                                 ))}

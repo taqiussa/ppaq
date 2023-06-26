@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
-use App\Models\Halaqoh;
-use App\Models\Bilhifzhi;
-use App\Models\Binnadzor;
-use App\Models\TesSemester;
 use App\Models\PenilaianSkor;
-use App\Models\TashihPengasuh;
+use App\Traits\InitTrait;
 
 class GetDataController extends Controller
 {
+    use InitTrait;
+
     public function get_absensi()
     {
         return response()->json([
@@ -23,13 +21,30 @@ class GetDataController extends Controller
 
     public function get_pelanggaran()
     {
-        return response()->json([
-            'listPelanggaran' => PenilaianSkor::whereTahun(request('tahun'))
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $list = PenilaianSkor::whereTahun(request('tahun'))
                 ->with([
                     'skors',
                     'user'
                 ])
                 ->get()
+                ->sortBy(['user.jenis_kelamin', 'user.name'])
+                ->values();
+        } else {
+
+            $list = PenilaianSkor::whereTahun(request('tahun'))
+                ->whereHas('user', fn ($q) => $q->whereJenisKelamin(auth()->user()->jenis_kelamin))
+                ->with([
+                    'skors',
+                    'user'
+                ])
+                ->get()
+                ->sortBy('user.name')
+                ->values();
+        }
+
+        return response()->json([
+            'listPelanggaran' => $list
         ]);
     }
 
