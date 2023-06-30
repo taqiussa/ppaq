@@ -129,6 +129,32 @@ trait InitTrait
         return $user;
     }
 
+    public function data_all_santri_with_pembayarans()
+    {
+        if (auth()->user()->hasRole('Pengasuh')) {
+            $user = User::whereNotNull('nis')
+                ->whereAktif(true)
+                ->with([
+                    'pembayarans' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+                ])
+                ->orderBy('jenis_kelamin')
+                ->orderBy('name')
+                ->get();
+        } else {
+            $user = User::whereNotNull('nis')
+                ->whereJenisKelamin(auth()->user()->jenis_kelamin)
+                ->whereAktif(true)
+                ->with([
+                    'pembayarans' => fn ($q) => $q->whereTahun(request('tahun'))
+                        ->whereKategoriPembayaranId(request('kategoriPembayaranId'))
+                ])
+                ->orderBy('name')
+                ->get();
+        }
+        return $user;
+    }
+
     public function data_all_santri_with_pendidikan()
     {
         if (auth()->user()->hasRole('Pengasuh')) {
